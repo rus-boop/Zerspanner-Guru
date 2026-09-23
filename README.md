@@ -1,19 +1,33 @@
-# Zerspaner GURU
+# Zerspaner Guru
 
-Ein einfacher, responsiver Schnittdatenrechner für den Werkstattalltag.
+Ein übersichtlicher Schnittdatenrechner für Metallfachkräfte und Auszubildende. Die Web-App berechnet Drehzahl und Vorschubgeschwindigkeit anhand von Werkzeug, Werkstoff und Durchmesser.
 
 ## Funktionen
 
-- Drehzahl und Vorschub automatisch berechnen
-- Werkzeug- und Werkstoffsuche
-- Alltagstaugliche Werkzeuge wie Fräser, Bohrer, Senker und Gewindebohrer
-- Werkstoffe einschließlich Titan
-- Empfohlene Schnittwerte automatisch übernehmen
-- Schnittgeschwindigkeit und Zahnvorschub manuell überschreiben
-- Läuft vollständig lokal im Browser
+- Durchsuchbare Auswahl typischer Werkzeuge wie Fräser, Bohrer, Senker und Reibahlen
+- Werkstoffabhängige Richtwerte, unter anderem für Stahl, Edelstahl, Aluminium und Titan
+- Automatische Berechnung von Drehzahl und Vorschub
+- Manuell anpassbare Schnittgeschwindigkeit und Vorschubwerte
+- Direkte Rückkehr zum empfohlenen Richtwert
+- Responsive Oberfläche für PC, Tablet und Smartphone
 
-## Starten
+## Hinweis
 
-`dist/index.html` direkt im Browser öffnen oder den Ordner über einen beliebigen statischen Webserver bereitstellen.
+Die hinterlegten Werte sind praxisnahe Startwerte. Werkzeugherstellerangaben sowie Maschine, Aufspannung, Kühlung, Auskraglänge und Bearbeitungsbedingungen haben Vorrang.
 
-Die Werte sind Richtwerte. Herstellerangaben, Maschine, Spannung und Kühlung müssen in der Praxis berücksichtigt werden.
+## Entwicklung
+
+```bash
+npm run install:ci
+npm run dev
+```
+
+Produktions-Build:
+
+```bash
+npm run build
+```
+
+## Technik
+
+Next.js/Vinext, React, TypeScript und Tailwind CSS.
