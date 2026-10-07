@@ -13,7 +13,6 @@ import {
   RotateCw,
   Search,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
@@ -3322,9 +3321,6 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <div className="live-pill hidden items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium sm:flex">
-              <Sparkles size={15} /> {text.live}
-            </div>
             <Popover>
               <PopoverTrigger
                 type="button"
@@ -3371,6 +3367,13 @@ export default function Home() {
             </Popover>
           </div>
         </header>
+        <section className="welcome" aria-labelledby="welcome-title">
+          <div>
+            <h2 id="welcome-title">{lang === "de" ? "Gute Arbeit beginnt mit den richtigen Werten." : text.subtitle}</h2>
+            <p>{lang === "de" ? "Wähle dein Werkzeug und den Werkstoff. Drehzahl und Vorschub werden direkt berechnet – und lassen sich an deine Maschine anpassen." : text.setupCopy}</p>
+          </div>
+          <span className="workshop-mark">{lang === "de" ? "Dein Helfer in der Werkstatt" : text.result}</span>
+        </section>
         <section className="grid gap-5 lg:grid-cols-[1.08fr_.92fr]">
           <div className="panel p-5 sm:p-7">
             <Title number="1" title={text.setup} copy={text.setupCopy} />
