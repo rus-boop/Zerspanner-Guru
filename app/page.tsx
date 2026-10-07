@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Lang = "de" | "en" | "ru" | "sv" | "tr";
+type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt";
 type Tool = {
   id: string;
   label: string;
@@ -269,6 +269,84 @@ const words = {
       "Bunlar başlangıç değerleridir. Takım üreticisi verileri, makine, bağlama, soğutma ve iş parçası kararlılığı önceliklidir.",
     language: "Dil seçin",
   },
+  es: {
+    subtitle: "Datos de corte para el taller",
+    live: "Cálculo en tiempo real",
+    setup: "Definir el mecanizado",
+    setupCopy: "La herramienta y el material determinan los valores iniciales.",
+    tool: "Buscar herramienta",
+    material: "Material",
+    diameterTool: "Diámetro de la herramienta",
+    diameterPart: "Diámetro de la pieza",
+    teeth: "Número de dientes z",
+    auto: "Actualizar valores automáticamente",
+    autoCopy: "Recomendaciones según la herramienta y el material",
+    limit: "Usar límite de revoluciones",
+    limitCopy: "Adecuado para máquinas antiguas",
+    maxRpm: "Velocidad máxima del husillo",
+    advanced: "Opciones avanzadas",
+    grade: "Calidad exacta del material",
+    standard: "Estándar / no especificado",
+    cutting: "Datos de corte",
+    cuttingCopy: "Sugeridos automáticamente y siempre editables.",
+    speed: "Velocidad de corte vc",
+    feedTooth: "Avance por diente fz",
+    feedRev: "Avance por revolución f",
+    reset: "Restablecer valores recomendados",
+    result: "Resultado",
+    rpm: "Velocidad del husillo n",
+    feed: "Velocidad de avance vf",
+    range: "Intervalo recomendado",
+    gentle: "Suave",
+    start: "Valor inicial",
+    productive: "Productivo",
+    toolSummary: "Herramienta",
+    materialSummary: "Material",
+    perRev: "Avance/rev",
+    important: "Importante:",
+    warning:
+      "Estos son valores iniciales. Tienen prioridad los datos del fabricante, la máquina, la sujeción, la refrigeración y la estabilidad de la pieza.",
+    language: "Elegir idioma",
+  },
+  pt: {
+    subtitle: "Dados de corte para a oficina",
+    live: "Cálculo em tempo real",
+    setup: "Definir a maquinação",
+    setupCopy: "A ferramenta e o material determinam os valores iniciais.",
+    tool: "Pesquisar ferramenta",
+    material: "Material",
+    diameterTool: "Diâmetro da ferramenta",
+    diameterPart: "Diâmetro da peça",
+    teeth: "Número de dentes z",
+    auto: "Atualizar valores automaticamente",
+    autoCopy: "Recomendações para a ferramenta e o material selecionados",
+    limit: "Usar limite de rotação",
+    limitCopy: "Adequado para máquinas antigas",
+    maxRpm: "Rotação máxima do fuso",
+    advanced: "Opções avançadas",
+    grade: "Classe exata do material",
+    standard: "Padrão / não especificado",
+    cutting: "Dados de corte",
+    cuttingCopy: "Sugeridos automaticamente e sempre editáveis.",
+    speed: "Velocidade de corte vc",
+    feedTooth: "Avanço por dente fz",
+    feedRev: "Avanço por rotação f",
+    reset: "Repor valores recomendados",
+    result: "Resultado",
+    rpm: "Rotação do fuso n",
+    feed: "Velocidade de avanço vf",
+    range: "Intervalo recomendado",
+    gentle: "Suave",
+    start: "Valor inicial",
+    productive: "Produtivo",
+    toolSummary: "Ferramenta",
+    materialSummary: "Material",
+    perRev: "Avanço/rot",
+    important: "Importante:",
+    warning:
+      "Estes são valores iniciais. Têm prioridade os dados do fabricante, a máquina, a fixação, a refrigeração e a estabilidade da peça.",
+    language: "Escolher idioma",
+  },
 } as const;
 
 const materialText: Record<Lang, Record<string, string>> = {
@@ -312,6 +390,26 @@ const materialText: Record<Lang, Record<string, string>> = {
     copper: "Bakır",
     titanium: "Titanyum / titanyum alaşımı",
     plastic: "Plastik",
+  },
+  es: {
+    steel: "Acero estructural / acero de fácil mecanizado",
+    stainless: "Acero inoxidable",
+    cast: "Fundición gris",
+    aluminium: "Aluminio",
+    brass: "Latón",
+    copper: "Cobre",
+    titanium: "Titanio / aleación de titanio",
+    plastic: "Plástico",
+  },
+  pt: {
+    steel: "Aço estrutural / aço de corte fácil",
+    stainless: "Aço inoxidável",
+    cast: "Ferro fundido cinzento",
+    aluminium: "Alumínio",
+    brass: "Latão",
+    copper: "Cobre",
+    titanium: "Titânio / liga de titânio",
+    plastic: "Plástico",
   },
 };
 
@@ -417,6 +515,56 @@ const toolText: Record<Lang, Record<string, string>> = {
     "turn-thread-60": "60° diş açma takımı",
     "turn-hss": "HSS tornalama takımı",
   },
+  es: {
+    "end-carbide": "Fresa de mango de metal duro integral",
+    "end-hss": "Fresa de mango HSS",
+    "slot-carbide": "Fresa de ranurar de metal duro integral",
+    "ball-carbide": "Fresa esférica de metal duro integral",
+    "face-carbide": "Fresa de planear con plaquitas de metal duro",
+    "spot-carbide": "Broca NC de puntear de metal duro integral",
+    "center-hss": "Broca de centrar HSS",
+    "drill-carbide": "Broca helicoidal de metal duro integral",
+    "drill-hss": "Broca helicoidal HSS",
+    "drill-hssco": "Broca helicoidal HSS-Co",
+    "countersink-hss": "Avellanador HSS de 90°",
+    "countersink-carbide": "Avellanador de metal duro de 90°",
+    "counterbore-hss": "Avellanador cilíndrico HSS con guía",
+    "reamer-hss": "Escariador de máquina HSS",
+    "reamer-carbide": "Escariador de máquina de metal duro",
+    "turn-rough": "Herramienta universal de desbaste de metal duro",
+    "turn-finish": "Herramienta de acabado de metal duro",
+    "turn-fine": "Herramienta de acabado fino de metal duro",
+    "turn-internal": "Herramienta de mandrinar de metal duro",
+    "turn-face": "Herramienta de refrentado de metal duro",
+    "turn-groove": "Herramienta de tronzado/ranurado de metal duro",
+    "turn-thread-60": "Herramienta de roscado de 60°",
+    "turn-hss": "Herramienta de torneado HSS",
+  },
+  pt: {
+    "end-carbide": "Fresa de topo de metal duro integral",
+    "end-hss": "Fresa de topo HSS",
+    "slot-carbide": "Fresa de ranhurar de metal duro integral",
+    "ball-carbide": "Fresa esférica de metal duro integral",
+    "face-carbide": "Fresa de facear com pastilhas de metal duro",
+    "spot-carbide": "Broca NC de centrar de metal duro integral",
+    "center-hss": "Broca de centrar HSS",
+    "drill-carbide": "Broca helicoidal de metal duro integral",
+    "drill-hss": "Broca helicoidal HSS",
+    "drill-hssco": "Broca helicoidal HSS-Co",
+    "countersink-hss": "Escareador HSS de 90°",
+    "countersink-carbide": "Escareador de metal duro de 90°",
+    "counterbore-hss": "Escareador cilíndrico HSS com guia",
+    "reamer-hss": "Alargador de máquina HSS",
+    "reamer-carbide": "Alargador de máquina de metal duro",
+    "turn-rough": "Ferramenta universal de desbaste de metal duro",
+    "turn-finish": "Ferramenta de acabamento de metal duro",
+    "turn-fine": "Ferramenta de acabamento fino de metal duro",
+    "turn-internal": "Ferramenta de mandrilar de metal duro",
+    "turn-face": "Ferramenta de facear de metal duro",
+    "turn-groove": "Ferramenta de corte/ranhurar de metal duro",
+    "turn-thread-60": "Ferramenta de roscar de 60°",
+    "turn-hss": "Ferramenta de torneamento HSS",
+  },
 };
 const categoryText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -447,6 +595,20 @@ const categoryText: Record<Lang, Record<string, string>> = {
     Senker: "Havşa",
     Reibahle: "Rayba",
     Drehmeißel: "Tornalama takımı",
+  },
+  es: {
+    Fräser: "Fresa",
+    Bohrer: "Broca",
+    Senker: "Avellanador",
+    Reibahle: "Escariador",
+    Drehmeißel: "Herramienta de torneado",
+  },
+  pt: {
+    Fräser: "Fresa",
+    Bohrer: "Broca",
+    Senker: "Escareador",
+    Reibahle: "Alargador",
+    Drehmeißel: "Ferramenta de torneamento",
   },
 };
 const toolUseText: Record<Lang, Record<string, string>> = {
@@ -486,6 +648,24 @@ const toolUseText: Record<Lang, Record<string, string>> = {
     "turn-face": "Alın tornalama",
     "turn-groove": "Kesme / kanal açma",
     "turn-thread-60": "Metrik diş",
+  },
+  es: {
+    "turn-rough": "Desbaste",
+    "turn-finish": "Acabado",
+    "turn-fine": "Acabado fino / contorneado",
+    "turn-internal": "Torneado interior",
+    "turn-face": "Refrentado",
+    "turn-groove": "Tronzado / ranurado",
+    "turn-thread-60": "Rosca métrica",
+  },
+  pt: {
+    "turn-rough": "Desbaste",
+    "turn-finish": "Acabamento",
+    "turn-fine": "Acabamento fino / contorno",
+    "turn-internal": "Torneamento interior",
+    "turn-face": "Faceamento",
+    "turn-groove": "Corte / ranhuramento",
+    "turn-thread-60": "Rosca métrica",
   },
 };
 const uiText = {
@@ -553,6 +733,13 @@ const uiText = {
     helpAria: "Erklärung anzeigen",
     languageSearch: "Sprache suchen …",
     noLanguage: "Keine Sprache gefunden.",
+    cameraRequired: "Kamerazugriff erforderlich",
+    cameraPrivacy:
+      "Die Kamera wird nur zum Erkennen des Werkzeugcodes verwendet. Es werden keine Bilder gespeichert oder hochgeladen.",
+    cameraAllow: "Kamera erlauben",
+    cameraStarting: "Kamera wird geöffnet …",
+    cameraRetry: "Erneut versuchen",
+    cameraError: "Kamerazugriff wurde abgelehnt oder ist nicht verfügbar.",
   },
   en: {
     toolHelp:
@@ -615,6 +802,13 @@ const uiText = {
     helpAria: "Show explanation",
     languageSearch: "Search language …",
     noLanguage: "No language found.",
+    cameraRequired: "Camera access required",
+    cameraPrivacy:
+      "The camera is used only to read the tool code. No images are stored or uploaded.",
+    cameraAllow: "Allow camera",
+    cameraStarting: "Starting camera …",
+    cameraRetry: "Try again",
+    cameraError: "Camera access was denied or is unavailable.",
   },
   ru: {
     toolHelp:
@@ -678,6 +872,13 @@ const uiText = {
     helpAria: "Показать пояснение",
     languageSearch: "Поиск языка …",
     noLanguage: "Язык не найден.",
+    cameraRequired: "Требуется доступ к камере",
+    cameraPrivacy:
+      "Камера используется только для распознавания кода. Изображения не сохраняются и не загружаются.",
+    cameraAllow: "Разрешить камеру",
+    cameraStarting: "Камера запускается …",
+    cameraRetry: "Повторить",
+    cameraError: "Доступ к камере отклонён или недоступен.",
   },
   sv: {
     toolHelp:
@@ -742,6 +943,13 @@ const uiText = {
     helpAria: "Visa förklaring",
     languageSearch: "Sök språk …",
     noLanguage: "Inget språk hittades.",
+    cameraRequired: "Kameraåtkomst krävs",
+    cameraPrivacy:
+      "Kameran används endast för att läsa verktygskoden. Inga bilder sparas eller laddas upp.",
+    cameraAllow: "Tillåt kamera",
+    cameraStarting: "Kameran startas …",
+    cameraRetry: "Försök igen",
+    cameraError: "Kameraåtkomst nekades eller är inte tillgänglig.",
   },
   tr: {
     toolHelp:
@@ -806,6 +1014,155 @@ const uiText = {
     helpAria: "Açıklamayı göster",
     languageSearch: "Dil ara …",
     noLanguage: "Dil bulunamadı.",
+    cameraRequired: "Kamera erişimi gerekli",
+    cameraPrivacy:
+      "Kamera yalnızca takım kodunu okumak için kullanılır. Hiçbir görüntü kaydedilmez veya yüklenmez.",
+    cameraAllow: "Kameraya izin ver",
+    cameraStarting: "Kamera başlatılıyor …",
+    cameraRetry: "Tekrar dene",
+    cameraError: "Kamera erişimi reddedildi veya kullanılamıyor.",
+  },
+  es: {
+    toolHelp:
+      "Escriba el nombre o grupo de una herramienta, por ejemplo fresa, avellanador o herramienta de torneado.",
+    toolPlaceholder: "p. ej., broca, avellanador, herramienta de torneado …",
+    noTool: "No se ha encontrado ninguna herramienta.",
+    materialHelp:
+      "El material determina el intervalo recomendado de velocidad de corte.",
+    partDiameterHelp:
+      "En torneado, introduzca el diámetro que se está mecanizando actualmente.",
+    toolDiameterHelp: "Diámetro efectivo de la herramienta en el filo de corte.",
+    teethHelp:
+      "Número de filos utilizado para calcular la velocidad de avance total.",
+    oldMachine: "Máquina antigua ×0,5",
+    oldMachineCopy: "Reduce a la mitad la velocidad de corte y el avance",
+    rpmLimit: "Usar límite de revoluciones",
+    rpmLimitCopy: "Límite técnico de la máquina",
+    rpmHelp:
+      "Es solo un límite técnico superior, no un objetivo. El intervalo recomendado original permanece visible.",
+    scanner: "Escanear código de herramienta",
+    scannerCopy: "Abrir el escáner de demostración con una herramienta de ejemplo",
+    scanTitle: "Escanear código de herramienta",
+    scanDescription:
+      "Prototipo: el código de prueba simula un código en el embalaje de una herramienta.",
+    camera: "Apunte la cámara a un código QR o Data Matrix",
+    scanDemo: "Escanear código de demostración",
+    recognized: "Herramienta de demostración reconocida",
+    demoWarning: "Datos de prueba, no son datos reales del fabricante",
+    manufacturer: "Fabricante",
+    article: "Número de artículo",
+    toolName: "Herramienta",
+    steel: "Acero",
+    aluminium: "Aluminio",
+    titanium: "Titanio",
+    oldActive:
+      "El modo de máquina antigua está activo: los valores importados se reducirán a la mitad.",
+    import: "Usar valores del fabricante",
+    gradeHelp:
+      "Opcionalmente, seleccione una calidad exacta. En caso contrario se utiliza el estándar general del material.",
+    operation: "Aplicación",
+    profile: "Perfil de datos de corte",
+    profileGroove: "Conservador · estabilidad primero",
+    profileFine: "Mayor velocidad de corte · avance bajo",
+    profileRough: "Alta capacidad de carga · mayor avance",
+    balanced: "Equilibrado",
+    turnNote:
+      "La calidad de la plaquita, la geometría, el voladizo y la refrigeración pueden cambiar considerablemente los valores. Por eso se muestra un intervalo inicial prudente.",
+    pitch: "Paso de rosca P",
+    pitchHelp:
+      "Al roscar en el torno, el avance por revolución debe coincidir exactamente con el paso de la rosca.",
+    speedHelp:
+      "Velocidad del filo respecto al material. Los datos del fabricante tienen prioridad.",
+    feedMillHelp:
+      "Recorrido por filo. El cálculo multiplica fz por las revoluciones y el número de dientes.",
+    feedRevHelp:
+      "Recorrido de la herramienta por cada revolución completa del husillo para calcular mm/min.",
+    withoutLimit: "sin límite de máquina",
+    limitedTo: "Limitado a",
+    calculated: "Calculado",
+    actual: "real",
+    limitIsNotTarget: "El máximo de la máquina es un límite, no un objetivo.",
+    helpAria: "Mostrar explicación",
+    languageSearch: "Buscar idioma …",
+    noLanguage: "No se ha encontrado ningún idioma.",
+    cameraRequired: "Se requiere acceso a la cámara",
+    cameraPrivacy:
+      "La cámara solo se utiliza para leer el código de la herramienta. No se guardan ni se suben imágenes.",
+    cameraAllow: "Permitir cámara",
+    cameraStarting: "Iniciando cámara …",
+    cameraRetry: "Intentar de nuevo",
+    cameraError: "El acceso a la cámara fue rechazado o no está disponible.",
+  },
+  pt: {
+    toolHelp:
+      "Introduza o nome ou grupo de uma ferramenta, por exemplo fresa, escareador ou ferramenta de torneamento.",
+    toolPlaceholder: "por ex., broca, escareador, ferramenta de torneamento …",
+    noTool: "Nenhuma ferramenta encontrada.",
+    materialHelp:
+      "O material determina o intervalo recomendado da velocidade de corte.",
+    partDiameterHelp:
+      "No torneamento, introduza o diâmetro que está a ser maquinado.",
+    toolDiameterHelp: "Diâmetro efetivo da ferramenta na aresta de corte.",
+    teethHelp:
+      "Número de arestas de corte utilizado para calcular o avanço total.",
+    oldMachine: "Máquina antiga ×0,5",
+    oldMachineCopy: "Reduz para metade a velocidade de corte e o avanço",
+    rpmLimit: "Usar limite de rotação",
+    rpmLimitCopy: "Limite técnico da máquina",
+    rpmHelp:
+      "Apenas um limite técnico superior, não um valor-alvo. O intervalo recomendado original continua visível.",
+    scanner: "Ler código da ferramenta",
+    scannerCopy: "Abrir o leitor de demonstração com uma ferramenta de exemplo",
+    scanTitle: "Ler código da ferramenta",
+    scanDescription:
+      "Protótipo: o código de teste simula um código na embalagem de uma ferramenta.",
+    camera: "Aponte a câmara para um código QR ou Data Matrix",
+    scanDemo: "Ler código de demonstração",
+    recognized: "Ferramenta de demonstração reconhecida",
+    demoWarning: "Dados de teste, não são dados reais do fabricante",
+    manufacturer: "Fabricante",
+    article: "Número do artigo",
+    toolName: "Ferramenta",
+    steel: "Aço",
+    aluminium: "Alumínio",
+    titanium: "Titânio",
+    oldActive:
+      "O modo de máquina antiga está ativo: os valores importados serão reduzidos para metade.",
+    import: "Usar valores do fabricante",
+    gradeHelp:
+      "Opcionalmente, selecione uma classe exata. Caso contrário, é utilizado o padrão geral do material.",
+    operation: "Aplicação",
+    profile: "Perfil de dados de corte",
+    profileGroove: "Conservador · estabilidade primeiro",
+    profileFine: "Maior velocidade de corte · avanço baixo",
+    profileRough: "Elevada capacidade de carga · maior avanço",
+    balanced: "Equilibrado",
+    turnNote:
+      "A classe da pastilha, a geometria, o balanço e a refrigeração podem alterar bastante os valores. Por isso, é apresentado um intervalo inicial prudente.",
+    pitch: "Passo da rosca P",
+    pitchHelp:
+      "No roscamento, o avanço por rotação deve corresponder exatamente ao passo da rosca.",
+    speedHelp:
+      "Velocidade da aresta de corte em relação ao material. Os dados do fabricante têm prioridade.",
+    feedMillHelp:
+      "Percurso por aresta de corte. O cálculo multiplica fz pela rotação e pelo número de dentes.",
+    feedRevHelp:
+      "Percurso da ferramenta por cada rotação completa do fuso para calcular mm/min.",
+    withoutLimit: "sem limite da máquina",
+    limitedTo: "Limitado a",
+    calculated: "Calculado",
+    actual: "real",
+    limitIsNotTarget: "A rotação máxima da máquina é um limite, não um objetivo.",
+    helpAria: "Mostrar explicação",
+    languageSearch: "Pesquisar idioma …",
+    noLanguage: "Nenhum idioma encontrado.",
+    cameraRequired: "É necessário acesso à câmara",
+    cameraPrivacy:
+      "A câmara é utilizada apenas para ler o código da ferramenta. Não são guardadas nem carregadas imagens.",
+    cameraAllow: "Permitir câmara",
+    cameraStarting: "A iniciar a câmara …",
+    cameraRetry: "Tentar novamente",
+    cameraError: "O acesso à câmara foi recusado ou não está disponível.",
   },
 } as const;
 
@@ -1367,6 +1724,18 @@ const languageOptions: {
     code: "TR",
     aliases: "tr tur turkish türkisch türkçe turkce turc turkiska",
   },
+  {
+    id: "es",
+    label: "Español",
+    code: "ES",
+    aliases: "es esp spanish spanisch español espanol espagnol spanska ispanyolca",
+  },
+  {
+    id: "pt",
+    label: "Português",
+    code: "PT",
+    aliases: "pt por portuguese portugiesisch português portugues portugais portugisiska portekizce brazil brasil",
+  },
 ];
 
 const editDistance = (left: string, right: string) => {
@@ -1496,6 +1865,8 @@ export default function Home() {
     ru: "ru-RU",
     sv: "sv-SE",
     tr: "tr-TR",
+    es: "es-ES",
+    pt: "pt-PT",
   } satisfies Record<Lang, string>)[lang];
   const units = ({
     de: { rpm: "U/min", rev: "mm/U", tooth: "mm/Z", minute: "mm/min" },
@@ -1503,6 +1874,8 @@ export default function Home() {
     ru: { rpm: "об/мин", rev: "мм/об", tooth: "мм/зуб", minute: "мм/мин" },
     sv: { rpm: "r/min", rev: "mm/varv", tooth: "mm/tand", minute: "mm/min" },
     tr: { rpm: "dev/dk", rev: "mm/dev", tooth: "mm/diş", minute: "mm/dk" },
+    es: { rpm: "rpm", rev: "mm/vuelta", tooth: "mm/diente", minute: "mm/min" },
+    pt: { rpm: "rpm", rev: "mm/rot", tooth: "mm/dente", minute: "mm/min" },
   } satisfies Record<
     Lang,
     { rpm: string; rev: string; tooth: string; minute: string }
@@ -1683,13 +2056,7 @@ export default function Home() {
       });
     } catch {
       setCameraState("error");
-      setCameraError(
-        lang === "de"
-          ? "Kamerazugriff wurde abgelehnt oder ist nicht verfügbar."
-          : lang === "ru"
-            ? "Доступ к камере отклонён или недоступен."
-            : "Camera access was denied or is unavailable.",
-      );
+      setCameraError(ui.cameraError);
     }
   };
   useEffect(() => () => stopCamera(), []);
@@ -1950,7 +2317,36 @@ export default function Home() {
                 </DialogHeader>
                 {!demoScanned ? (
                   <div className="scanner-camera">
-                    {cameraState === "notice" ? <div className="camera-permission"><ShieldCheck size={42}/><strong>{lang === "de" ? "Kamerazugriff erforderlich" : lang === "ru" ? "Требуется доступ к камере" : "Camera access required"}</strong><p>{lang === "de" ? "Die Kamera wird nur zum Erkennen des Werkzeugcodes verwendet. Es werden keine Bilder gespeichert oder hochgeladen." : lang === "ru" ? "Камера используется только для распознавания кода. Изображения не сохраняются и не загружаются." : "The camera is used only to read the tool code. No images are stored or uploaded."}</p><button type="button" onClick={startCamera}><Camera size={18}/>{lang === "de" ? "Kamera erlauben" : lang === "ru" ? "Разрешить камеру" : "Allow camera"}</button></div> : <><div className="scan-corners camera-frame">{cameraState === "active" ? <video ref={videoRef} muted playsInline/> : <p>{cameraState === "starting" ? (lang === "de" ? "Kamera wird geöffnet …" : lang === "ru" ? "Камера запускается…" : "Starting camera…") : cameraError}</p>}<span className="scan-line"/></div><p>{ui.camera}</p>{cameraState === "error" && <button type="button" onClick={startCamera}>{lang === "de" ? "Erneut versuchen" : lang === "ru" ? "Повторить" : "Try again"}</button>}</>}
+                    {cameraState === "notice" ? (
+                      <div className="camera-permission">
+                        <ShieldCheck size={42} />
+                        <strong>{ui.cameraRequired}</strong>
+                        <p>{ui.cameraPrivacy}</p>
+                        <button type="button" onClick={startCamera}>
+                          <Camera size={18} />
+                          {ui.cameraAllow}
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="scan-corners camera-frame">
+                          {cameraState === "active" ? (
+                            <video ref={videoRef} muted playsInline />
+                          ) : (
+                            <p>
+                              {cameraState === "starting" ? ui.cameraStarting : cameraError}
+                            </p>
+                          )}
+                          <span className="scan-line" />
+                        </div>
+                        <p>{ui.camera}</p>
+                        {cameraState === "error" && (
+                          <button type="button" onClick={startCamera}>
+                            {ui.cameraRetry}
+                          </button>
+                        )}
+                      </>
+                    )}
                     <button type="button" className="demo-scan-button" onClick={() => { stopCamera(); setDemoScanned(true); }}>
                       {ui.scanDemo}
                     </button>
