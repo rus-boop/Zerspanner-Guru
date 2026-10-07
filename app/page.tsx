@@ -11,6 +11,7 @@ import {
   Info,
   QrCode,
   RotateCw,
+  Search,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
@@ -550,6 +551,8 @@ const uiText = {
     actual: "tatsächlich",
     limitIsNotTarget: "Das Maschinenmaximum ist eine Grenze, kein Zielwert.",
     helpAria: "Erklärung anzeigen",
+    languageSearch: "Sprache suchen …",
+    noLanguage: "Keine Sprache gefunden.",
   },
   en: {
     toolHelp:
@@ -610,6 +613,8 @@ const uiText = {
     actual: "actual",
     limitIsNotTarget: "The machine maximum is a limit, not a target.",
     helpAria: "Show explanation",
+    languageSearch: "Search language …",
+    noLanguage: "No language found.",
   },
   ru: {
     toolHelp:
@@ -671,6 +676,8 @@ const uiText = {
     actual: "фактически",
     limitIsNotTarget: "Максимум станка — это предел, а не цель.",
     helpAria: "Показать пояснение",
+    languageSearch: "Поиск языка …",
+    noLanguage: "Язык не найден.",
   },
   sv: {
     toolHelp:
@@ -733,6 +740,8 @@ const uiText = {
     actual: "faktiskt",
     limitIsNotTarget: "Maskinens maxvarvtal är en gräns, inte ett mål.",
     helpAria: "Visa förklaring",
+    languageSearch: "Sök språk …",
+    noLanguage: "Inget språk hittades.",
   },
   tr: {
     toolHelp:
@@ -795,6 +804,8 @@ const uiText = {
     actual: "gerçek",
     limitIsNotTarget: "Makinenin maksimum devri bir sınırdır, hedef değildir.",
     helpAria: "Açıklamayı göster",
+    languageSearch: "Dil ara …",
+    noLanguage: "Dil bulunamadı.",
   },
 } as const;
 
@@ -1319,6 +1330,76 @@ const normalizeSearch = (value: string) =>
     .replace(/ı/g, "i")
     .replace(/[^a-z0-9а-яё]+/gi, " ")
     .trim();
+
+const languageOptions: {
+  id: Lang;
+  label: string;
+  code: string;
+  aliases: string;
+}[] = [
+  {
+    id: "de",
+    label: "Deutsch",
+    code: "DE",
+    aliases: "de deutsch deutsche german germany allemand tyska almanca",
+  },
+  {
+    id: "en",
+    label: "English",
+    code: "UK",
+    aliases: "en eng english englisch uk gb british anglais engelska ingilizce",
+  },
+  {
+    id: "ru",
+    label: "Русский",
+    code: "RU",
+    aliases: "ru rus russian russisch русский ryska rusca",
+  },
+  {
+    id: "sv",
+    label: "Svenska",
+    code: "SE",
+    aliases: "sv se swe swedish schwedisch svenska suédois isvecce",
+  },
+  {
+    id: "tr",
+    label: "Türkçe",
+    code: "TR",
+    aliases: "tr tur turkish türkisch türkçe turkce turc turkiska",
+  },
+];
+
+const editDistance = (left: string, right: string) => {
+  const previous = Array.from({ length: right.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= left.length; i += 1) {
+    let diagonal = previous[0];
+    previous[0] = i;
+    for (let j = 1; j <= right.length; j += 1) {
+      const above = previous[j];
+      previous[j] = Math.min(
+        previous[j] + 1,
+        previous[j - 1] + 1,
+        diagonal + (left[i - 1] === right[j - 1] ? 0 : 1),
+      );
+      diagonal = above;
+    }
+  }
+  return previous[right.length];
+};
+
+const languageMatches = (
+  option: (typeof languageOptions)[number],
+  query: string,
+) => {
+  const needle = normalizeSearch(query);
+  if (!needle) return true;
+  const words = normalizeSearch(
+    `${option.label} ${option.code} ${option.aliases}`,
+  ).split(" ");
+  if (words.some((word) => word.includes(needle))) return true;
+  const tolerance = needle.length >= 6 ? 2 : needle.length >= 4 ? 1 : 0;
+  return words.some((word) => editDistance(word, needle) <= tolerance);
+};
 const toolAliases: Record<string, string> = {
   "end-carbide": "schaftfraeser end mill fraeser milling carbide vhm pinnfras parmak freze karbur",
   "end-hss": "schaftfraeser end mill fraeser milling hss pinnfras parmak freze",
@@ -1405,6 +1486,10 @@ export default function Home() {
   const ui = uiText[lang];
   const [toolQuery, setToolQuery] = useState("");
   const [toolInput, setToolInput] = useState("");
+  const [languageQuery, setLanguageQuery] = useState("");
+  const filteredLanguages = languageOptions.filter((option) =>
+    languageMatches(option, languageQuery),
+  );
   const locale = ({
     de: "de-DE",
     en: "en-GB",
@@ -1481,6 +1566,7 @@ export default function Home() {
   }, []);
   const changeLanguage = (next: Lang) => {
     setLang(next);
+    setLanguageQuery("");
     localStorage.setItem("zerspaner-language", next);
     document.documentElement.lang = next;
   };
@@ -1639,20 +1725,38 @@ export default function Home() {
               </PopoverTrigger>
               <PopoverContent align="end" className="language-menu">
                 <p>{text.language}</p>
-                {(
-                  [
-                    ["de", "Deutsch"],
-                    ["en", "English"],
-                    ["ru", "Русский"],
-                    ["sv", "Svenska"],
-                    ["tr", "Türkçe"],
-                  ] as const
-                ).map(([id, label]) => (
-                  <button key={id} onClick={() => changeLanguage(id)}>
-                    <span>{label}</span>
-                    {lang === id && <Check size={17} />}
-                  </button>
-                ))}
+                <div className="language-search">
+                  <Search size={16} aria-hidden="true" />
+                  <Input
+                    type="search"
+                    value={languageQuery}
+                    onChange={(event) => setLanguageQuery(event.target.value)}
+                    placeholder={ui.languageSearch}
+                    aria-label={ui.languageSearch}
+                    autoComplete="off"
+                    spellCheck={false}
+                  />
+                </div>
+                <div className="language-options">
+                  {filteredLanguages.length ? (
+                    filteredLanguages.map(({ id, label, code }) => (
+                      <button
+                        key={id}
+                        className={lang === id ? "active" : undefined}
+                        aria-pressed={lang === id}
+                        onClick={() => changeLanguage(id)}
+                      >
+                        <span>{label}</span>
+                        <span className="language-choice-meta">
+                          <span className="language-code">{code}</span>
+                          {lang === id && <Check size={17} />}
+                        </span>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="language-empty">{ui.noLanguage}</div>
+                  )}
+                </div>
               </PopoverContent>
             </Popover>
           </div>
