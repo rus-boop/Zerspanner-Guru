@@ -2044,16 +2044,32 @@ export default function Home() {
                 </strong>
               </div>
               <div className="range-actions">
-                <button onClick={() => setCuttingSpeed(rangeLowSpeed)}>
+                <button
+                  className={cuttingSpeed === rangeLowSpeed ? "active" : undefined}
+                  aria-pressed={cuttingSpeed === rangeLowSpeed}
+                  onClick={() => setCuttingSpeed(rangeLowSpeed)}
+                >
+                  {cuttingSpeed === rangeLowSpeed && <Check size={15} />}
                   {text.gentle}
                 </button>
                 <button
-                  className="active"
+                  className={
+                    cuttingSpeed === recommendedSpeed ? "active" : undefined
+                  }
+                  aria-pressed={cuttingSpeed === recommendedSpeed}
                   onClick={() => setCuttingSpeed(recommendedSpeed)}
                 >
+                  {cuttingSpeed === recommendedSpeed && <Check size={15} />}
                   {text.start}
                 </button>
-                <button onClick={() => setCuttingSpeed(rangeHighSpeed)}>
+                <button
+                  className={
+                    cuttingSpeed === rangeHighSpeed ? "active" : undefined
+                  }
+                  aria-pressed={cuttingSpeed === rangeHighSpeed}
+                  onClick={() => setCuttingSpeed(rangeHighSpeed)}
+                >
+                  {cuttingSpeed === rangeHighSpeed && <Check size={15} />}
                   {text.productive}
                 </button>
               </div>
