@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl";
+type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro";
 type Tool = {
   id: string;
   label: string;
@@ -611,6 +611,36 @@ const words = {
     warning: "Dit zijn beginwaarden. Gegevens van de fabrikant, machine, opspanning, koeling en werkstukstabiliteit hebben voorrang.",
     language: "Taal kiezen",
   },
+  cs: {
+    subtitle: "Řezné podmínky pro dílnu", live: "Výpočet v reálném čase", setup: "Nastavit obrábění",
+    setupCopy: "Nástroj a materiál určují počáteční hodnoty.", tool: "Hledat nástroj", material: "Materiál",
+    diameterTool: "Průměr nástroje", diameterPart: "Průměr obrobku", teeth: "Počet zubů z",
+    auto: "Automaticky aktualizovat hodnoty", autoCopy: "Doporučení podle zvoleného nástroje a materiálu",
+    limit: "Použít omezení otáček", limitCopy: "Vhodné pro starší stroje", maxRpm: "Maximální otáčky vřetena",
+    advanced: "Pokročilé možnosti", grade: "Přesná jakost materiálu", standard: "Standardní / neuvedeno",
+    cutting: "Řezné podmínky", cuttingCopy: "Automaticky navržené a podle potřeby upravitelné.",
+    speed: "Řezná rychlost vc", feedTooth: "Posuv na zub fz", feedRev: "Posuv na otáčku f",
+    reset: "Obnovit doporučené hodnoty", result: "Výsledek", rpm: "Otáčky vřetena n", feed: "Rychlost posuvu vf",
+    range: "Doporučený rozsah", gentle: "Šetrný", start: "Počáteční hodnota", productive: "Produktivní",
+    toolSummary: "Nástroj", materialSummary: "Materiál", perRev: "Posuv/ot.", important: "Důležité:",
+    warning: "Jedná se o počáteční hodnoty. Přednost mají údaje výrobce, stroj, upnutí, chlazení a stabilita obrobku.",
+    language: "Vybrat jazyk",
+  },
+  ro: {
+    subtitle: "Parametri de așchiere pentru atelier", live: "Calcul în timp real", setup: "Stabilește prelucrarea",
+    setupCopy: "Scula și materialul determină valorile inițiale.", tool: "Caută scula", material: "Material",
+    diameterTool: "Diametrul sculei", diameterPart: "Diametrul piesei", teeth: "Număr de dinți z",
+    auto: "Actualizează automat valorile", autoCopy: "Recomandări potrivite pentru scula și materialul selectate",
+    limit: "Folosește limita de turație", limitCopy: "Potrivit pentru mașini mai vechi", maxRpm: "Turația maximă a arborelui",
+    advanced: "Opțiuni avansate", grade: "Clasa exactă a materialului", standard: "Standard / nespecificat",
+    cutting: "Parametri de așchiere", cuttingCopy: "Sugerați automat și ajustabili după necesitate.",
+    speed: "Viteza de așchiere vc", feedTooth: "Avans pe dinte fz", feedRev: "Avans pe rotație f",
+    reset: "Restabilește valorile recomandate", result: "Rezultat", rpm: "Turația arborelui n", feed: "Viteza de avans vf",
+    range: "Interval recomandat", gentle: "Prudent", start: "Valoare inițială", productive: "Productiv",
+    toolSummary: "Sculă", materialSummary: "Material", perRev: "Avans/rot.", important: "Important:",
+    warning: "Acestea sunt valori inițiale. Datele producătorului, mașina, fixarea, răcirea și stabilitatea piesei au prioritate.",
+    language: "Alege limba",
+  },
 } as const;
 
 const materialText: Record<Lang, Record<string, string>> = {
@@ -737,6 +767,8 @@ const materialText: Record<Lang, Record<string, string>> = {
   },
   it: { steel: "Acciaio da costruzione / automatico", stainless: "Acciaio inox", cast: "Ghisa grigia", aluminium: "Alluminio", brass: "Ottone", copper: "Rame", titanium: "Titanio / lega di titanio", plastic: "Plastica" },
   nl: { steel: "Constructiestaal / automatenstaal", stainless: "Roestvast staal", cast: "Grijs gietijzer", aluminium: "Aluminium", brass: "Messing", copper: "Koper", titanium: "Titanium / titaniumlegering", plastic: "Kunststof" },
+  cs: { steel: "Konstrukční / automatová ocel", stainless: "Nerezová ocel", cast: "Šedá litina", aluminium: "Hliník", brass: "Mosaz", copper: "Měď", titanium: "Titan / titanová slitina", plastic: "Plast" },
+  ro: { steel: "Oțel de construcții / pentru automate", stainless: "Oțel inoxidabil", cast: "Fontă cenușie", aluminium: "Aluminiu", brass: "Alamă", copper: "Cupru", titanium: "Titan / aliaj de titan", plastic: "Plastic" },
 };
 
 const toolText: Record<Lang, Record<string, string>> = {
@@ -1069,6 +1101,32 @@ const toolText: Record<Lang, Record<string, string>> = {
     "turn-groove": "Hardmetalen afsteek- / groefbeitel", "turn-thread-60": "60° schroefdraadbeitel",
     "turn-hss": "HSS-draaibeitel",
   },
+  cs: {
+    "end-carbide": "Monolitní karbidová stopková fréza", "end-hss": "Stopková fréza HSS",
+    "slot-carbide": "Monolitní karbidová drážkovací fréza", "ball-carbide": "Monolitní karbidová kulová fréza",
+    "face-carbide": "Čelní fréza s karbidovými destičkami", "spot-carbide": "Monolitní karbidový NC navrtávák",
+    "center-hss": "Středicí vrták HSS", "drill-carbide": "Monolitní karbidový spirálový vrták",
+    "drill-hss": "Spirálový vrták HSS", "drill-hssco": "Spirálový vrták HSS-Co",
+    "countersink-hss": "Kuželový záhlubník HSS 90°", "countersink-carbide": "Karbidový kuželový záhlubník 90°",
+    "counterbore-hss": "Válcový záhlubník HSS s vodicím čepem", "reamer-hss": "Strojní výstružník HSS",
+    "reamer-carbide": "Karbidový strojní výstružník", "turn-rough": "Univerzální karbidový hrubovací soustružnický nůž",
+    "turn-finish": "Karbidový dokončovací soustružnický nůž", "turn-fine": "Karbidový jemný dokončovací nůž",
+    "turn-internal": "Karbidový vnitřní soustružnický nůž", "turn-face": "Karbidový čelní soustružnický nůž",
+    "turn-groove": "Karbidový upichovací / zapichovací nůž", "turn-thread-60": "Závitový nůž 60°", "turn-hss": "Soustružnický nůž HSS",
+  },
+  ro: {
+    "end-carbide": "Freză cilindro-frontală din carbură monobloc", "end-hss": "Freză cilindro-frontală HSS",
+    "slot-carbide": "Freză de canelat din carbură monobloc", "ball-carbide": "Freză sferică din carbură monobloc",
+    "face-carbide": "Freză frontală cu plăcuțe din carbură", "spot-carbide": "Burghiu NC de punctare din carbură monobloc",
+    "center-hss": "Burghiu de centrare HSS", "drill-carbide": "Burghiu elicoidal din carbură monobloc",
+    "drill-hss": "Burghiu elicoidal HSS", "drill-hssco": "Burghiu elicoidal HSS-Co",
+    "countersink-hss": "Teșitor HSS 90°", "countersink-carbide": "Teșitor din carbură 90°",
+    "counterbore-hss": "Lărgitor cilindric HSS cu ghidaj", "reamer-hss": "Alezor de mașină HSS",
+    "reamer-carbide": "Alezor de mașină din carbură", "turn-rough": "Cuțit universal de degroșare din carbură",
+    "turn-finish": "Cuțit de finisare din carbură", "turn-fine": "Cuțit de superfinisare din carbură",
+    "turn-internal": "Cuțit de strunjire interioară din carbură", "turn-face": "Cuțit de planare din carbură",
+    "turn-groove": "Cuțit de retezare / canelare din carbură", "turn-thread-60": "Cuțit de filetat 60°", "turn-hss": "Cuțit de strung HSS",
+  },
 };
 const categoryText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -1158,6 +1216,8 @@ const categoryText: Record<Lang, Record<string, string>> = {
   },
   it: { Fräser: "Fresa", Bohrer: "Punta", Senker: "Svasatore", Reibahle: "Alesatore", Drehmeißel: "Utensile da tornitura" },
   nl: { Fräser: "Frees", Bohrer: "Boor", Senker: "Verzinkboor", Reibahle: "Ruimer", Drehmeißel: "Draaibeitel" },
+  cs: { Fräser: "Fréza", Bohrer: "Vrták", Senker: "Záhlubník", Reibahle: "Výstružník", Drehmeißel: "Soustružnický nůž" },
+  ro: { Fräser: "Freză", Bohrer: "Burghiu", Senker: "Teșitor", Reibahle: "Alezor", Drehmeißel: "Cuțit de strung" },
 };
 const toolUseText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -1271,6 +1331,8 @@ const toolUseText: Record<Lang, Record<string, string>> = {
   },
   it: { "turn-rough": "Sgrossatura", "turn-finish": "Finitura", "turn-fine": "Superfinitura / contornatura", "turn-internal": "Tornitura interna", "turn-face": "Sfacciatura", "turn-groove": "Troncatura / scanalatura", "turn-thread-60": "Filettatura metrica" },
   nl: { "turn-rough": "Voordraaien", "turn-finish": "Nadraaien", "turn-fine": "Fijnnadraaien / contouren", "turn-internal": "Binnendraaien", "turn-face": "Vlakdraaien", "turn-groove": "Afsteken / groefsteken", "turn-thread-60": "Metrische schroefdraad" },
+  cs: { "turn-rough": "Hrubování", "turn-finish": "Dokončování", "turn-fine": "Jemné dokončování / konturování", "turn-internal": "Vnitřní soustružení", "turn-face": "Čelní soustružení", "turn-groove": "Upichování / zapichování", "turn-thread-60": "Metrický závit" },
+  ro: { "turn-rough": "Degroșare", "turn-finish": "Finisare", "turn-fine": "Superfinisare / conturare", "turn-internal": "Strunjire interioară", "turn-face": "Planare", "turn-groove": "Retezare / canelare", "turn-thread-60": "Filet metric" },
 };
 const uiText = {
   de: {
@@ -2185,6 +2247,26 @@ const uiText = {
     cameraAllow: "Camera toestaan", cameraStarting: "Camera wordt gestart …", cameraRetry: "Opnieuw proberen",
     cameraError: "Cameratoegang is geweigerd of de camera is niet beschikbaar.",
   },
+  cs: {
+    toolHelp: "Zadejte název nebo skupinu nástroje, například frézu, záhlubník nebo soustružnický nůž.", toolPlaceholder: "např. vrták, záhlubník, soustružnický nůž …", noTool: "Nebyl nalezen žádný nástroj.",
+    materialHelp: "Materiál určuje doporučený rozsah řezné rychlosti.", partDiameterHelp: "Při soustružení zadejte průměr obrobku v právě obráběném místě.", toolDiameterHelp: "Účinný průměr nástroje na břitu.", teethHelp: "Počet břitů použitý k výpočtu celkového posuvu.",
+    oldMachine: "Starší stroj ×0,5", oldMachineCopy: "Sníží řeznou rychlost a posuv na polovinu", rpmLimit: "Použít omezení otáček", rpmLimitCopy: "Technický limit stroje", rpmHelp: "Pouze technická horní mez, nikoli cílová hodnota. Původní rozsah zůstává viditelný.",
+    scanner: "Skenovat kód nástroje", scannerCopy: "Otevřít ukázkový skener s příkladem nástroje", scanTitle: "Skenovat kód nástroje", scanDescription: "Prototyp: testovací kód simuluje kód na obalu nástroje.", camera: "Namiřte kameru na QR nebo Data Matrix kód", scanDemo: "Naskenovat ukázkový kód", recognized: "Ukázkový nástroj rozpoznán", demoWarning: "Testovací údaje, nikoli skutečná data výrobce",
+    manufacturer: "Výrobce", article: "Číslo položky", toolName: "Nástroj", steel: "Ocel", aluminium: "Hliník", titanium: "Titan", oldActive: "Režim staršího stroje je aktivní: importované hodnoty budou poloviční.", import: "Použít hodnoty výrobce",
+    gradeHelp: "Můžete vybrat přesnou jakost. Jinak se použije obecný standard materiálu.", operation: "Použití", profile: "Profil řezných podmínek", profileGroove: "Šetrný · stabilita na prvním místě", profileFine: "Vyšší řezná rychlost · nízký posuv", profileRough: "Vysoké zatížení · větší posuv", balanced: "Vyvážený",
+    turnNote: "Jakost destičky, geometrie, vyložení nástroje a chlazení mohou hodnoty výrazně ovlivnit. Proto se zobrazuje opatrný počáteční rozsah.", pitch: "Stoupání závitu P", pitchHelp: "Při soustružení závitu musí posuv na otáčku přesně odpovídat stoupání závitu.", speedHelp: "Rychlost břitu vůči materiálu. Přednost mají údaje výrobce.", feedMillHelp: "Pohyb na jeden břit. Kalkulátor násobí fz otáčkami a počtem zubů.", feedRevHelp: "Pohyb nástroje během jedné úplné otáčky vřetena pro výpočet mm/min.",
+    withoutLimit: "bez omezení stroje", limitedTo: "Omezeno na", calculated: "Vypočteno", actual: "skutečné", limitIsNotTarget: "Maximální otáčky stroje jsou limitem, nikoli cílem.", helpAria: "Zobrazit vysvětlení", languageSearch: "Hledat jazyk …", noLanguage: "Nebyl nalezen žádný jazyk.", cameraRequired: "Je vyžadován přístup ke kameře", cameraPrivacy: "Kamera slouží pouze ke čtení kódu nástroje. Snímky se neukládají ani neodesílají.", cameraAllow: "Povolit kameru", cameraStarting: "Spouštění kamery …", cameraRetry: "Zkusit znovu", cameraError: "Přístup ke kameře byl zamítnut nebo kamera není k dispozici.",
+  },
+  ro: {
+    toolHelp: "Introdu numele sau grupa sculei, de exemplu freză, teșitor sau cuțit de strung.", toolPlaceholder: "de ex. burghiu, teșitor, cuțit de strung …", noTool: "Nu a fost găsită nicio sculă.",
+    materialHelp: "Materialul determină intervalul recomandat al vitezei de așchiere.", partDiameterHelp: "La strunjire, introdu diametrul piesei în zona prelucrată în prezent.", toolDiameterHelp: "Diametrul efectiv al sculei la muchia așchietoare.", teethHelp: "Numărul de muchii așchietoare folosit la calculul avansului total.",
+    oldMachine: "Mașină mai veche ×0,5", oldMachineCopy: "Înjumătățește viteza de așchiere și avansul", rpmLimit: "Folosește limita de turație", rpmLimitCopy: "Limita tehnică a mașinii", rpmHelp: "Doar o limită tehnică superioară, nu o valoare țintă. Intervalul inițial rămâne vizibil.",
+    scanner: "Scanează codul sculei", scannerCopy: "Deschide scanerul demonstrativ cu o sculă exemplu", scanTitle: "Scanează codul sculei", scanDescription: "Prototip: codul de test simulează un cod de pe ambalajul sculei.", camera: "Îndreaptă camera spre codul QR sau Data Matrix", scanDemo: "Scanează codul demonstrativ", recognized: "Scula demonstrativă a fost recunoscută", demoWarning: "Date de test, nu date reale ale producătorului",
+    manufacturer: "Producător", article: "Număr articol", toolName: "Sculă", steel: "Oțel", aluminium: "Aluminiu", titanium: "Titan", oldActive: "Modul pentru mașină mai veche este activ: valorile importate vor fi înjumătățite.", import: "Folosește valorile producătorului",
+    gradeHelp: "Poți selecta clasa exactă. Altfel se folosește standardul general al materialului.", operation: "Utilizare", profile: "Profilul parametrilor de așchiere", profileGroove: "Prudent · stabilitatea pe primul loc", profileFine: "Viteză de așchiere mai mare · avans redus", profileRough: "Sarcină mare · avans mai mare", balanced: "Echilibrat",
+    turnNote: "Clasa plăcuței, geometria, ieșirea sculei și răcirea pot modifica semnificativ valorile. De aceea este afișat un interval inițial prudent.", pitch: "Pasul filetului P", pitchHelp: "La strunjirea filetului, avansul pe rotație trebuie să corespundă exact pasului filetului.", speedHelp: "Viteza muchiei așchietoare față de material. Datele producătorului au prioritate.", feedMillHelp: "Deplasarea pe muchie așchietoare. Calculatorul înmulțește fz cu turația și numărul de dinți.", feedRevHelp: "Deplasarea sculei la o rotație completă a arborelui, utilizată pentru calculul mm/min.",
+    withoutLimit: "fără limita mașinii", limitedTo: "Limitat la", calculated: "Calculat", actual: "real", limitIsNotTarget: "Turația maximă a mașinii este o limită, nu o țintă.", helpAria: "Arată explicația", languageSearch: "Caută limba …", noLanguage: "Nu a fost găsită nicio limbă.", cameraRequired: "Este necesar accesul la cameră", cameraPrivacy: "Camera este folosită doar pentru citirea codului sculei. Imaginile nu sunt salvate sau încărcate.", cameraAllow: "Permite camera", cameraStarting: "Camera pornește …", cameraRetry: "Încearcă din nou", cameraError: "Accesul la cameră a fost refuzat sau camera nu este disponibilă.",
+  },
 } as const;
 
 const materialGrades: Record<
@@ -2805,6 +2887,8 @@ const languageOptions: {
     code: "NL",
     aliases: "nl nld dut dutch niederländisch niederlaendisch nederlands holländisch hollaendisch hollandais olandese",
   },
+  { id: "cs", label: "Čeština", code: "CZ", aliases: "cs cz ces cze czech tschechisch čeština cestina tchèque ceco" },
+  { id: "ro", label: "Română", code: "RO", aliases: "ro ron rum romanian rumänisch rumaenisch română romana roumain rumeno" },
 ];
 
 const languageSortNames: Record<Lang, string> = {
@@ -2818,10 +2902,12 @@ const languageSortNames: Record<Lang, string> = {
   ko: "Koreanisch",
   nl: "Niederländisch",
   pt: "Portugiesisch",
+  ro: "Rumänisch",
   ru: "Russisch",
   sv: "Schwedisch",
   es: "Spanisch",
   tr: "Türkisch",
+  cs: "Tschechisch",
   vi: "Vietnamesisch",
 };
 
@@ -2964,6 +3050,8 @@ export default function Home() {
     ko: "ko-KR",
     it: "it-IT",
     nl: "nl-NL",
+    cs: "cs-CZ",
+    ro: "ro-RO",
   } satisfies Record<Lang, string>)[lang];
   const units = ({
     de: { rpm: "U/min", rev: "mm/U", tooth: "mm/Z", minute: "mm/min" },
@@ -2981,6 +3069,8 @@ export default function Home() {
     ko: { rpm: "회/분", rev: "mm/회", tooth: "mm/날", minute: "mm/분" },
     it: { rpm: "giri/min", rev: "mm/giro", tooth: "mm/dente", minute: "mm/min" },
     nl: { rpm: "omw/min", rev: "mm/omw", tooth: "mm/tand", minute: "mm/min" },
+    cs: { rpm: "ot/min", rev: "mm/ot", tooth: "mm/zub", minute: "mm/min" },
+    ro: { rpm: "rot/min", rev: "mm/rot", tooth: "mm/dinte", minute: "mm/min" },
   } satisfies Record<
     Lang,
     { rpm: string; rev: string; tooth: string; minute: string }
