@@ -46,7 +46,7 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Lang = "de" | "en" | "ru";
+type Lang = "de" | "en" | "ru" | "sv" | "tr";
 type Tool = {
   id: string;
   label: string;
@@ -190,6 +190,84 @@ const words = {
       "Это начальные значения. Данные производителя инструмента, станок, закрепление, охлаждение и жёсткость детали имеют приоритет.",
     language: "Выбрать язык",
   },
+  sv: {
+    subtitle: "Skärdata för verkstaden",
+    live: "Beräknas direkt",
+    setup: "Ange bearbetning",
+    setupCopy: "Verktyg och material bestämmer startvärdena.",
+    tool: "Sök verktyg",
+    material: "Material",
+    diameterTool: "Verktygsdiameter",
+    diameterPart: "Arbetsstyckets diameter",
+    teeth: "Antal skär z",
+    auto: "Uppdatera värden automatiskt",
+    autoCopy: "Rekommendationer för valt verktyg och material",
+    limit: "Använd varvtalsgräns",
+    limitCopy: "Lämpligt för äldre maskiner",
+    maxRpm: "Maximalt spindelvarvtal",
+    advanced: "Avancerade alternativ",
+    grade: "Exakt materialkvalitet",
+    standard: "Standard / ej angivet",
+    cutting: "Skärvärden",
+    cuttingCopy: "Föreslås automatiskt och kan alltid ändras.",
+    speed: "Skärhastighet vc",
+    feedTooth: "Matning per tand fz",
+    feedRev: "Matning per varv f",
+    reset: "Återställ rekommenderade värden",
+    result: "Resultat",
+    rpm: "Spindelvarvtal n",
+    feed: "Matningshastighet vf",
+    range: "Rekommenderat intervall",
+    gentle: "Skonsamt",
+    start: "Startvärde",
+    productive: "Produktivt",
+    toolSummary: "Verktyg",
+    materialSummary: "Material",
+    perRev: "Matning/varv",
+    important: "Viktigt:",
+    warning:
+      "Detta är startvärden. Verktygstillverkarens uppgifter, maskinen, uppspänningen, kylningen och arbetsstyckets stabilitet har företräde.",
+    language: "Välj språk",
+  },
+  tr: {
+    subtitle: "Atölye için kesme verileri",
+    live: "Anlık hesaplama",
+    setup: "İşlemeyi belirle",
+    setupCopy: "Takım ve malzeme başlangıç değerlerini belirler.",
+    tool: "Takım ara",
+    material: "Malzeme",
+    diameterTool: "Takım çapı",
+    diameterPart: "İş parçası çapı",
+    teeth: "Kesici uç sayısı z",
+    auto: "Değerleri otomatik güncelle",
+    autoCopy: "Seçilen takım ve malzemeye uygun öneriler",
+    limit: "Devir sınırını kullan",
+    limitCopy: "Eski makineler için uygundur",
+    maxRpm: "Maksimum iş mili devri",
+    advanced: "Gelişmiş seçenekler",
+    grade: "Kesin malzeme kalitesi",
+    standard: "Standart / belirtilmedi",
+    cutting: "Kesme değerleri",
+    cuttingCopy: "Otomatik önerilir ve her zaman değiştirilebilir.",
+    speed: "Kesme hızı vc",
+    feedTooth: "Diş başına ilerleme fz",
+    feedRev: "Devir başına ilerleme f",
+    reset: "Önerilen değerlere sıfırla",
+    result: "Sonuç",
+    rpm: "İş mili devri n",
+    feed: "İlerleme hızı vf",
+    range: "Önerilen aralık",
+    gentle: "Düşük yük",
+    start: "Başlangıç değeri",
+    productive: "Üretken",
+    toolSummary: "Takım",
+    materialSummary: "Malzeme",
+    perRev: "İlerleme/dev",
+    important: "Önemli:",
+    warning:
+      "Bunlar başlangıç değerleridir. Takım üreticisi verileri, makine, bağlama, soğutma ve iş parçası kararlılığı önceliklidir.",
+    language: "Dil seçin",
+  },
 } as const;
 
 const materialText: Record<Lang, Record<string, string>> = {
@@ -213,6 +291,26 @@ const materialText: Record<Lang, Record<string, string>> = {
     copper: "Медь",
     titanium: "Титан / титановый сплав",
     plastic: "Пластик",
+  },
+  sv: {
+    steel: "Konstruktionsstål / automatstål",
+    stainless: "Rostfritt stål",
+    cast: "Gråjärn",
+    aluminium: "Aluminium",
+    brass: "Mässing",
+    copper: "Koppar",
+    titanium: "Titan / titanlegering",
+    plastic: "Plast",
+  },
+  tr: {
+    steel: "Yapı çeliği / otomat çeliği",
+    stainless: "Paslanmaz çelik",
+    cast: "Gri dökme demir",
+    aluminium: "Alüminyum",
+    brass: "Pirinç",
+    copper: "Bakır",
+    titanium: "Titanyum / titanyum alaşımı",
+    plastic: "Plastik",
   },
 };
 
@@ -268,6 +366,56 @@ const toolText: Record<Lang, Record<string, string>> = {
     "turn-thread-60": "Резьбовой резец 60°",
     "turn-hss": "Токарный резец HSS",
   },
+  sv: {
+    "end-carbide": "Pinnfräs i solid hårdmetall",
+    "end-hss": "HSS-pinnfräs",
+    "slot-carbide": "Spårfräs i solid hårdmetall",
+    "ball-carbide": "Kulfräs i solid hårdmetall",
+    "face-carbide": "Planfräs med hårdmetallskär",
+    "spot-carbide": "NC-centrumborr i solid hårdmetall",
+    "center-hss": "HSS-centrumborr",
+    "drill-carbide": "Spiralborr i solid hårdmetall",
+    "drill-hss": "HSS-spiralborr",
+    "drill-hssco": "HSS-Co-spiralborr",
+    "countersink-hss": "HSS-försänkare 90°",
+    "countersink-carbide": "Hårdmetallförsänkare 90°",
+    "counterbore-hss": "HSS-planförsänkare med styrtapp",
+    "reamer-hss": "HSS-maskinbrotsch",
+    "reamer-carbide": "Maskinbrotsch i hårdmetall",
+    "turn-rough": "Universellt hårdmetallverktyg för grovsvarvning",
+    "turn-finish": "Hårdmetallverktyg för finsvarvning",
+    "turn-fine": "Hårdmetallverktyg för finbearbetning",
+    "turn-internal": "Hårdmetallverktyg för invändig svarvning",
+    "turn-face": "Hårdmetallverktyg för plansvarvning",
+    "turn-groove": "Hårdmetallverktyg för avstickning/spårstickning",
+    "turn-thread-60": "Gängsvarvverktyg 60°",
+    "turn-hss": "HSS-svarvverktyg",
+  },
+  tr: {
+    "end-carbide": "Karbür parmak freze",
+    "end-hss": "HSS parmak freze",
+    "slot-carbide": "Karbür kanal frezesi",
+    "ball-carbide": "Karbür küresel uçlu freze",
+    "face-carbide": "Karbür uçlu alın frezesi",
+    "spot-carbide": "Karbür NC punta matkabı",
+    "center-hss": "HSS punta matkabı",
+    "drill-carbide": "Karbür helisel matkap",
+    "drill-hss": "HSS helisel matkap",
+    "drill-hssco": "HSS-Co helisel matkap",
+    "countersink-hss": "HSS 90° havşa",
+    "countersink-carbide": "Karbür 90° havşa",
+    "counterbore-hss": "Kılavuz pimli HSS silindirik havşa",
+    "reamer-hss": "HSS makine raybası",
+    "reamer-carbide": "Karbür makine raybası",
+    "turn-rough": "Karbür üniversal kaba tornalama takımı",
+    "turn-finish": "Karbür finiş tornalama takımı",
+    "turn-fine": "Karbür hassas finiş tornalama takımı",
+    "turn-internal": "Karbür iç tornalama takımı",
+    "turn-face": "Karbür alın tornalama takımı",
+    "turn-groove": "Karbür kesme/kanal açma takımı",
+    "turn-thread-60": "60° diş açma takımı",
+    "turn-hss": "HSS tornalama takımı",
+  },
 };
 const categoryText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -284,6 +432,20 @@ const categoryText: Record<Lang, Record<string, string>> = {
     Senker: "Зенковка",
     Reibahle: "Развёртка",
     Drehmeißel: "Токарный резец",
+  },
+  sv: {
+    Fräser: "Fräsverktyg",
+    Bohrer: "Borr",
+    Senker: "Försänkare",
+    Reibahle: "Brotsch",
+    Drehmeißel: "Svarvverktyg",
+  },
+  tr: {
+    Fräser: "Freze",
+    Bohrer: "Matkap",
+    Senker: "Havşa",
+    Reibahle: "Rayba",
+    Drehmeißel: "Tornalama takımı",
   },
 };
 const toolUseText: Record<Lang, Record<string, string>> = {
@@ -305,6 +467,24 @@ const toolUseText: Record<Lang, Record<string, string>> = {
     "turn-face": "Подрезка торца",
     "turn-groove": "Отрезка / канавка",
     "turn-thread-60": "Метрическая резьба",
+  },
+  sv: {
+    "turn-rough": "Grovsvarvning",
+    "turn-finish": "Finsvarvning",
+    "turn-fine": "Finbearbetning / kontursvarvning",
+    "turn-internal": "Invändig svarvning",
+    "turn-face": "Plansvarvning",
+    "turn-groove": "Avstickning / spårstickning",
+    "turn-thread-60": "Metrisk gänga",
+  },
+  tr: {
+    "turn-rough": "Kaba tornalama",
+    "turn-finish": "Finiş tornalama",
+    "turn-fine": "Hassas finiş / kontur tornalama",
+    "turn-internal": "İç tornalama",
+    "turn-face": "Alın tornalama",
+    "turn-groove": "Kesme / kanal açma",
+    "turn-thread-60": "Metrik diş",
   },
 };
 const uiText = {
@@ -491,6 +671,130 @@ const uiText = {
     actual: "фактически",
     limitIsNotTarget: "Максимум станка — это предел, а не цель.",
     helpAria: "Показать пояснение",
+  },
+  sv: {
+    toolHelp:
+      "Skriv ett verktygsnamn eller en grupp, till exempel fräs, försänkare eller svarvverktyg.",
+    toolPlaceholder: "t.ex. borr, försänkare, svarvverktyg …",
+    noTool: "Inget verktyg hittades.",
+    materialHelp:
+      "Materialet bestämmer det rekommenderade intervallet för skärhastigheten.",
+    partDiameterHelp:
+      "Vid svarvning anger du diametern som bearbetas just nu.",
+    toolDiameterHelp: "Verktygets verksamma diameter vid skäreggen.",
+    teethHelp:
+      "Antalet skäreggar som används för att beräkna den totala matningen.",
+    oldMachine: "Äldre maskin ×0,5",
+    oldMachineCopy: "Halverar skärhastighet och matning",
+    rpmLimit: "Använd varvtalsgräns",
+    rpmLimitCopy: "Maskinens tekniska maxgräns",
+    rpmHelp:
+      "Endast en teknisk övre gräns – inget målvärde. Det ursprungliga rekommenderade intervallet visas fortfarande.",
+    scanner: "Skanna verktygskod",
+    scannerCopy: "Öppna demoskannern med ett exempelverktyg",
+    scanTitle: "Skanna verktygskod",
+    scanDescription:
+      "Prototyp: testkoden simulerar en kod på en verktygsförpackning.",
+    camera: "Rikta kameran mot en QR- eller Data Matrix-kod",
+    scanDemo: "Skanna demokod",
+    recognized: "Demoverktyget har identifierats",
+    demoWarning: "Testdata – inte verkliga tillverkardata",
+    manufacturer: "Tillverkare",
+    article: "Artikelnummer",
+    toolName: "Verktyg",
+    steel: "Stål",
+    aluminium: "Aluminium",
+    titanium: "Titan",
+    oldActive:
+      "Läget för äldre maskin är aktivt: importerade värden halveras.",
+    import: "Använd tillverkarens värden",
+    gradeHelp:
+      "Du kan välja en exakt kvalitet för att anpassa startvärdet. Annars används materialets allmänna standard.",
+    operation: "Användning",
+    profile: "Skärdataprofil",
+    profileGroove: "Försiktig · stabilitet först",
+    profileFine: "Högre skärhastighet · låg matning",
+    profileRough: "Hög belastningstålighet · högre matning",
+    balanced: "Balanserad",
+    turnNote:
+      "Skärsort, geometri, utstick och kylning kan påverka värdena avsevärt. Därför visar kalkylatorn ett försiktigt startintervall.",
+    pitch: "Gängstigning P",
+    pitchHelp:
+      "Vid gängsvarvning måste matningen per varv exakt motsvara gängstigningen.",
+    speedHelp:
+      "Skäreggens hastighet i förhållande till materialet. Tillverkarens uppgifter har företräde.",
+    feedMillHelp:
+      "Förflyttning per skäregg. Kalkylatorn multiplicerar fz med varvtalet och antalet skär.",
+    feedRevHelp:
+      "Verktygets förflyttning per helt spindelvarv, som används för att beräkna mm/min.",
+    withoutLimit: "utan maskingräns",
+    limitedTo: "Begränsad till",
+    calculated: "Beräknat",
+    actual: "faktiskt",
+    limitIsNotTarget: "Maskinens maxvarvtal är en gräns, inte ett mål.",
+    helpAria: "Visa förklaring",
+  },
+  tr: {
+    toolHelp:
+      "Freze, havşa veya tornalama takımı gibi bir takım adı ya da grubu yazın.",
+    toolPlaceholder: "örn. matkap, havşa, tornalama takımı …",
+    noTool: "Takım bulunamadı.",
+    materialHelp:
+      "Malzeme, önerilen kesme hızı aralığını belirler.",
+    partDiameterHelp:
+      "Tornalamada o anda işlenen iş parçası çapını girin.",
+    toolDiameterHelp: "Kesme bölgesindeki etkin takım çapı.",
+    teethHelp:
+      "Toplam ilerleme hızını hesaplamak için kullanılan kesici kenar sayısı.",
+    oldMachine: "Eski makine ×0,5",
+    oldMachineCopy: "Kesme hızını ve ilerlemeyi yarıya indirir",
+    rpmLimit: "Devir sınırını kullan",
+    rpmLimitCopy: "Makinenin teknik üst sınırı",
+    rpmHelp:
+      "Yalnızca teknik bir üst sınırdır, hedef değer değildir. Asıl öneri aralığı görünür kalır.",
+    scanner: "Takım kodunu tara",
+    scannerCopy: "Örnek takımla demo tarayıcıyı aç",
+    scanTitle: "Takım kodunu tara",
+    scanDescription:
+      "Prototip: test kodu, takım ambalajındaki bir kodu simüle eder.",
+    camera: "Kamerayı QR veya Data Matrix koduna doğrultun",
+    scanDemo: "Demo kodunu tara",
+    recognized: "Demo takım tanındı",
+    demoWarning: "Test verisi – gerçek üretici verisi değildir",
+    manufacturer: "Üretici",
+    article: "Ürün numarası",
+    toolName: "Takım",
+    steel: "Çelik",
+    aluminium: "Alüminyum",
+    titanium: "Titanyum",
+    oldActive:
+      "Eski makine modu etkin: içe aktarılan değerler yarıya indirilecektir.",
+    import: "Üretici değerlerini kullan",
+    gradeHelp:
+      "İsterseniz başlangıç değerini uyarlamak için kesin kaliteyi seçin. Aksi halde genel malzeme standardı kullanılır.",
+    operation: "Uygulama",
+    profile: "Kesme verisi profili",
+    profileGroove: "Temkinli · önce kararlılık",
+    profileFine: "Daha yüksek kesme hızı · düşük ilerleme",
+    profileRough: "Yüksek yük kapasitesi · daha yüksek ilerleme",
+    balanced: "Dengeli",
+    turnNote:
+      "Uç kalitesi, geometri, takım çıkıntısı ve soğutma değerleri önemli ölçüde değiştirebilir. Bu nedenle hesaplayıcı temkinli bir başlangıç aralığı gösterir.",
+    pitch: "Diş adımı P",
+    pitchHelp:
+      "Diş tornalamada devir başına ilerleme, diş adımına tam olarak eşit olmalıdır.",
+    speedHelp:
+      "Kesici kenarın malzemeye göre hızı. Üretici verileri önceliklidir.",
+    feedMillHelp:
+      "Kesici kenar başına hareket. Hesaplayıcı fz değerini devir ve kesici sayısıyla çarpar.",
+    feedRevHelp:
+      "Bir tam iş mili devrindeki takım hareketidir ve mm/dk hesabında kullanılır.",
+    withoutLimit: "makine sınırı olmadan",
+    limitedTo: "Sınırlandırıldı:",
+    calculated: "Hesaplanan",
+    actual: "gerçek",
+    limitIsNotTarget: "Makinenin maksimum devri bir sınırdır, hedef değildir.",
+    helpAria: "Açıklamayı göster",
   },
 } as const;
 
@@ -1012,32 +1316,33 @@ const normalizeSearch = (value: string) =>
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/ß/g, "ss")
+    .replace(/ı/g, "i")
     .replace(/[^a-z0-9а-яё]+/gi, " ")
     .trim();
 const toolAliases: Record<string, string> = {
-  "end-carbide": "schaftfraeser end mill fraeser milling carbide vhm",
-  "end-hss": "schaftfraeser end mill fraeser milling hss",
-  "slot-carbide": "nutenfraeser slot mill nut fraeser",
-  "ball-carbide": "kugelfraeser ball nose radius fraeser",
-  "face-carbide": "planfraeser face mill wsp wendeplatte",
-  "spot-carbide": "anbohrer spot drill nc",
-  "center-hss": "zentrierbohrer center drill",
-  "drill-carbide": "bohrer spiralbohrer drill vhm carbide",
-  "drill-hss": "bohrer spiralbohrer drill hss",
-  "drill-hssco": "bohrer spiralbohrer drill cobalt hssco hsse",
-  "countersink-hss": "senker kegelsenker countersink 90 hss",
-  "countersink-carbide": "senker kegelsenker countersink 90 vhm carbide",
-  "counterbore-hss": "flachsenker counterbore zapfen hss",
-  "reamer-hss": "reibahle reamer hss",
-  "reamer-carbide": "reibahle reamer vhm carbide",
-  "turn-rough": "drehmeissel schrupper roughing 85",
-  "turn-finish": "drehmeissel schlichter finishing 60",
-  "turn-fine": "drehmeissel feinschlichter fine finishing 30",
-  "turn-internal": "innendrehmeissel ausdreher boring internal",
-  "turn-face": "plandrehen planmeissel facing",
-  "turn-groove": "abstechen einstechen stechmeissel parting grooving",
-  "turn-thread-60": "gewinde gewindedrehmeissel threading 60",
-  "turn-hss": "drehmeissel turning hss",
+  "end-carbide": "schaftfraeser end mill fraeser milling carbide vhm pinnfras parmak freze karbur",
+  "end-hss": "schaftfraeser end mill fraeser milling hss pinnfras parmak freze",
+  "slot-carbide": "nutenfraeser slot mill nut fraeser sparfras kanal frezesi",
+  "ball-carbide": "kugelfraeser ball nose radius fraeser kulfras kuresel freze",
+  "face-carbide": "planfraeser face mill wsp wendeplatte planfras alin frezesi",
+  "spot-carbide": "anbohrer spot drill nc centrumborr punta matkabi",
+  "center-hss": "zentrierbohrer center drill centrumborr punta matkabi",
+  "drill-carbide": "bohrer spiralbohrer drill vhm carbide borr matkap karbur",
+  "drill-hss": "bohrer spiralbohrer drill hss borr matkap",
+  "drill-hssco": "bohrer spiralbohrer drill cobalt hssco hsse borr matkap kobolt",
+  "countersink-hss": "senker kegelsenker countersink 90 hss forsankare havsa",
+  "countersink-carbide": "senker kegelsenker countersink 90 vhm carbide forsankare havsa karbur",
+  "counterbore-hss": "flachsenker counterbore zapfen hss planforsankare silindirik havsa",
+  "reamer-hss": "reibahle reamer hss brotsch rayba",
+  "reamer-carbide": "reibahle reamer vhm carbide brotsch rayba karbur",
+  "turn-rough": "drehmeissel schrupper roughing 85 grovsvarvning kaba tornalama",
+  "turn-finish": "drehmeissel schlichter finishing 60 finsvarvning finis tornalama",
+  "turn-fine": "drehmeissel feinschlichter fine finishing 30 finbearbetning hassas finis",
+  "turn-internal": "innendrehmeissel ausdreher boring internal invandig svarvning ic tornalama",
+  "turn-face": "plandrehen planmeissel facing plansvarvning alin tornalama",
+  "turn-groove": "abstechen einstechen stechmeissel parting grooving avstickning sparstickning kesme kanal acma",
+  "turn-thread-60": "gewinde gewindedrehmeissel threading 60 gangsvarvning dis acma",
+  "turn-hss": "drehmeissel turning hss svarvverktyg tornalama takimi",
 };
 
 export default function Home() {
@@ -1046,13 +1351,23 @@ export default function Home() {
   const ui = uiText[lang];
   const [toolQuery, setToolQuery] = useState("");
   const [toolInput, setToolInput] = useState("");
-  const locale = lang === "de" ? "de-DE" : lang === "ru" ? "ru-RU" : "en-GB";
-  const units =
-    lang === "de"
-      ? { rpm: "U/min", rev: "mm/U", tooth: "mm/Z", minute: "mm/min" }
-      : lang === "ru"
-        ? { rpm: "об/мин", rev: "мм/об", tooth: "мм/зуб", minute: "мм/мин" }
-        : { rpm: "rpm", rev: "mm/rev", tooth: "mm/tooth", minute: "mm/min" };
+  const locale = ({
+    de: "de-DE",
+    en: "en-GB",
+    ru: "ru-RU",
+    sv: "sv-SE",
+    tr: "tr-TR",
+  } satisfies Record<Lang, string>)[lang];
+  const units = ({
+    de: { rpm: "U/min", rev: "mm/U", tooth: "mm/Z", minute: "mm/min" },
+    en: { rpm: "rpm", rev: "mm/rev", tooth: "mm/tooth", minute: "mm/min" },
+    ru: { rpm: "об/мин", rev: "мм/об", tooth: "мм/зуб", minute: "мм/мин" },
+    sv: { rpm: "r/min", rev: "mm/varv", tooth: "mm/tand", minute: "mm/min" },
+    tr: { rpm: "dev/dk", rev: "mm/dev", tooth: "mm/diş", minute: "mm/dk" },
+  } satisfies Record<
+    Lang,
+    { rpm: string; rev: string; tooth: string; minute: string }
+  >)[lang];
   const format = (value: number, digits = 0) =>
     new Intl.NumberFormat(locale, { maximumFractionDigits: digits }).format(
       value,
@@ -1275,6 +1590,8 @@ export default function Home() {
                     ["de", "Deutsch"],
                     ["en", "English"],
                     ["ru", "Русский"],
+                    ["sv", "Svenska"],
+                    ["tr", "Türkçe"],
                   ] as const
                 ).map(([id, label]) => (
                   <button key={id} onClick={() => changeLanguage(id)}>
