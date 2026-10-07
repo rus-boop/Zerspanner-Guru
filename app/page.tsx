@@ -1345,6 +1345,60 @@ const toolAliases: Record<string, string> = {
   "turn-hss": "drehmeissel turning hss svarvverktyg tornalama takimi",
 };
 
+type EditableNumberInputProps = Omit<
+  React.ComponentProps<typeof Input>,
+  "value" | "onChange"
+> & {
+  value: number;
+  onValueChange: (value: number) => void;
+};
+
+function EditableNumberInput({
+  value,
+  onValueChange,
+  onBlur,
+  onFocus,
+  ...props
+}: EditableNumberInputProps) {
+  const [draft, setDraft] = useState(String(value));
+
+  useEffect(() => {
+    setDraft(String(value));
+  }, [value]);
+
+  return (
+    <Input
+      {...props}
+      value={draft}
+      onFocus={(event) => {
+        event.currentTarget.select();
+        onFocus?.(event);
+      }}
+      onChange={(event) => {
+        const raw = event.target.value;
+        const normalized = raw.replace(/^(-?)0+(?=\d)/, "$1");
+        setDraft(normalized);
+
+        if (normalized === "") return;
+        const next = Number(normalized);
+        if (Number.isFinite(next)) onValueChange(next);
+      }}
+      onBlur={(event) => {
+        if (draft === "") {
+          setDraft(String(value));
+        } else {
+          const normalized = Number(draft);
+          if (Number.isFinite(normalized)) {
+            setDraft(String(normalized));
+            onValueChange(normalized);
+          }
+        }
+        onBlur?.(event);
+      }}
+    />
+  );
+}
+
 export default function Home() {
   const [lang, setLang] = useState<Lang>("de");
   const text = words[lang];
@@ -1693,28 +1747,26 @@ export default function Home() {
                 }
                 suffix="mm"
               >
-                <Input
+                <EditableNumberInput
                   className="control pr-12"
                   type="number"
                   inputMode="decimal"
                   min=".1"
                   step=".1"
                   value={diameter}
-                  onFocus={(e) => e.currentTarget.select()}
-                  onChange={(e) => setDiameter(Number(e.target.value))}
+                  onValueChange={setDiameter}
                 />
               </Field>
               {tool.mode === "mill" && (
                 <Field label={text.teeth} help={ui.teethHelp}>
-                  <Input
+                  <EditableNumberInput
                     className="control"
                     type="number"
                     inputMode="numeric"
                     min="1"
                     step="1"
                     value={teeth}
-                    onFocus={(e) => e.currentTarget.select()}
-                    onChange={(e) => setTeeth(Number(e.target.value))}
+                    onValueChange={setTeeth}
                   />
                 </Field>
               )}
@@ -1758,7 +1810,7 @@ export default function Home() {
                 />
               </div>
               <Field label={text.maxRpm} help={ui.rpmHelp} suffix={units.rpm}>
-                <Input
+                <EditableNumberInput
                   className="control pr-16"
                   type="number"
                   inputMode="numeric"
@@ -1766,8 +1818,7 @@ export default function Home() {
                   step="100"
                   value={maxRpm}
                   disabled={!rpmLimitActive}
-                  onFocus={(e) => e.currentTarget.select()}
-                  onChange={(e) => setMaxRpm(Number(e.target.value))}
+                  onValueChange={setMaxRpm}
                 />
               </Field>
             </div>
@@ -1901,15 +1952,14 @@ export default function Home() {
             {tool.id === "turn-thread-60" && (
               <div className="mt-5">
                 <Field label={ui.pitch} help={ui.pitchHelp} suffix="mm">
-                  <Input
+                  <EditableNumberInput
                     className="control pr-12"
                     type="number"
                     inputMode="decimal"
                     min=".1"
                     step=".1"
                     value={threadPitch}
-                    onFocus={(e) => e.currentTarget.select()}
-                    onChange={(e) => setThreadPitch(Number(e.target.value))}
+                    onValueChange={setThreadPitch}
                   />
                 </Field>
               </div>
@@ -1939,15 +1989,14 @@ export default function Home() {
             <Title number="2" title={text.cutting} copy={text.cuttingCopy} />
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label={text.speed} help={ui.speedHelp} suffix="m/min">
-                <Input
+                <EditableNumberInput
                   className="control pr-16"
                   type="number"
                   inputMode="decimal"
                   min="1"
                   step="1"
                   value={cuttingSpeed}
-                  onFocus={(e) => e.currentTarget.select()}
-                  onChange={(e) => setCuttingSpeed(Number(e.target.value))}
+                  onValueChange={setCuttingSpeed}
                 />
               </Field>
               <Field
@@ -1955,15 +2004,14 @@ export default function Home() {
                 help={tool.mode === "mill" ? ui.feedMillHelp : ui.feedRevHelp}
                 suffix={tool.mode === "mill" ? units.tooth : units.rev}
               >
-                <Input
+                <EditableNumberInput
                   className="control pr-14"
                   type="number"
                   inputMode="decimal"
                   min=".001"
                   step=".005"
                   value={feed}
-                  onFocus={(e) => e.currentTarget.select()}
-                  onChange={(e) => setFeed(Number(e.target.value))}
+                  onValueChange={setFeed}
                 />
               </Field>
             </div>
