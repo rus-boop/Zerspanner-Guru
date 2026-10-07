@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro";
+type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
   id: string;
   label: string;
@@ -641,6 +641,15 @@ const words = {
     warning: "Acestea sunt valori inițiale. Datele producătorului, mașina, fixarea, răcirea și stabilitatea piesei au prioritate.",
     language: "Alege limba",
   },
+  pl: {
+    subtitle: "Parametry skrawania dla warsztatu", live: "Obliczenia na żywo", setup: "Ustaw obróbkę", setupCopy: "Narzędzie i materiał określają wartości początkowe.", tool: "Szukaj narzędzia", material: "Materiał", diameterTool: "Średnica narzędzia", diameterPart: "Średnica przedmiotu", teeth: "Liczba ostrzy z", auto: "Automatycznie aktualizuj wartości", autoCopy: "Zalecenia dopasowane do wybranego narzędzia i materiału", limit: "Użyj ograniczenia obrotów", limitCopy: "Odpowiednie dla starszych maszyn", maxRpm: "Maksymalne obroty wrzeciona", advanced: "Opcje zaawansowane", grade: "Dokładny gatunek materiału", standard: "Standard / nie określono", cutting: "Parametry skrawania", cuttingCopy: "Proponowane automatycznie i możliwe do zmiany.", speed: "Prędkość skrawania vc", feedTooth: "Posuw na ostrze fz", feedRev: "Posuw na obrót f", reset: "Przywróć zalecane wartości", result: "Wynik", rpm: "Obroty wrzeciona n", feed: "Prędkość posuwu vf", range: "Zalecany zakres", gentle: "Ostrożny", start: "Wartość początkowa", productive: "Produktywny", toolSummary: "Narzędzie", materialSummary: "Materiał", perRev: "Posuw/obr.", important: "Ważne:", warning: "Są to wartości początkowe. Pierwszeństwo mają dane producenta, maszyna, mocowanie, chłodzenie i stabilność przedmiotu.", language: "Wybierz język",
+  },
+  ar: {
+    subtitle: "بيانات القطع للورشة", live: "حساب مباشر", setup: "تحديد عملية التشغيل", setupCopy: "تحدد الأداة والمادة القيم الابتدائية.", tool: "البحث عن أداة", material: "المادة", diameterTool: "قطر الأداة", diameterPart: "قطر قطعة العمل", teeth: "عدد الأسنان z", auto: "تحديث القيم تلقائيًا", autoCopy: "توصيات مناسبة للأداة والمادة المحددتين", limit: "استخدام حد سرعة الدوران", limitCopy: "مناسب للماكينات القديمة", maxRpm: "أقصى سرعة للمغزل", advanced: "خيارات متقدمة", grade: "درجة المادة الدقيقة", standard: "قياسي / غير محدد", cutting: "بيانات القطع", cuttingCopy: "تُقترح تلقائيًا ويمكن تعديلها عند الحاجة.", speed: "سرعة القطع vc", feedTooth: "التغذية لكل سن fz", feedRev: "التغذية لكل دورة f", reset: "استعادة القيم الموصى بها", result: "النتيجة", rpm: "سرعة المغزل n", feed: "سرعة التغذية vf", range: "النطاق الموصى به", gentle: "محافظ", start: "قيمة البداية", productive: "إنتاجي", toolSummary: "الأداة", materialSummary: "المادة", perRev: "التغذية/دورة", important: "مهم:", warning: "هذه قيم ابتدائية. تكون الأولوية لبيانات الشركة المصنعة والماكينة والتثبيت والتبريد وثبات قطعة العمل.", language: "اختيار اللغة",
+  },
+  hi: {
+    subtitle: "कार्यशाला के लिए कटिंग डेटा", live: "लाइव गणना", setup: "मशीनिंग सेट करें", setupCopy: "औज़ार और सामग्री शुरुआती मान तय करते हैं।", tool: "औज़ार खोजें", material: "सामग्री", diameterTool: "औज़ार का व्यास", diameterPart: "वर्कपीस का व्यास", teeth: "दाँतों की संख्या z", auto: "मान अपने आप अपडेट करें", autoCopy: "चुने गए औज़ार और सामग्री के अनुसार सुझाव", limit: "RPM सीमा का उपयोग करें", limitCopy: "पुरानी मशीनों के लिए उपयुक्त", maxRpm: "अधिकतम स्पिंडल RPM", advanced: "उन्नत विकल्प", grade: "सामग्री का सटीक ग्रेड", standard: "मानक / निर्दिष्ट नहीं", cutting: "कटिंग डेटा", cuttingCopy: "अपने आप सुझाया जाता है और ज़रूरत पर बदला जा सकता है।", speed: "कटिंग स्पीड vc", feedTooth: "प्रति दाँत फीड fz", feedRev: "प्रति चक्कर फीड f", reset: "सुझाए गए मान बहाल करें", result: "परिणाम", rpm: "स्पिंडल गति n", feed: "फीड गति vf", range: "सुझाई गई सीमा", gentle: "सुरक्षित", start: "शुरुआती मान", productive: "उत्पादक", toolSummary: "औज़ार", materialSummary: "सामग्री", perRev: "फीड/चक्कर", important: "महत्वपूर्ण:", warning: "ये शुरुआती मान हैं। निर्माता डेटा, मशीन, क्लैम्पिंग, कूलिंग और वर्कपीस की स्थिरता को प्राथमिकता दें।", language: "भाषा चुनें",
+  },
 } as const;
 
 const materialText: Record<Lang, Record<string, string>> = {
@@ -769,6 +778,9 @@ const materialText: Record<Lang, Record<string, string>> = {
   nl: { steel: "Constructiestaal / automatenstaal", stainless: "Roestvast staal", cast: "Grijs gietijzer", aluminium: "Aluminium", brass: "Messing", copper: "Koper", titanium: "Titanium / titaniumlegering", plastic: "Kunststof" },
   cs: { steel: "Konstrukční / automatová ocel", stainless: "Nerezová ocel", cast: "Šedá litina", aluminium: "Hliník", brass: "Mosaz", copper: "Měď", titanium: "Titan / titanová slitina", plastic: "Plast" },
   ro: { steel: "Oțel de construcții / pentru automate", stainless: "Oțel inoxidabil", cast: "Fontă cenușie", aluminium: "Aluminiu", brass: "Alamă", copper: "Cupru", titanium: "Titan / aliaj de titan", plastic: "Plastic" },
+  pl: { steel: "Stal konstrukcyjna / automatowa", stainless: "Stal nierdzewna", cast: "Żeliwo szare", aluminium: "Aluminium", brass: "Mosiądz", copper: "Miedź", titanium: "Tytan / stop tytanu", plastic: "Tworzywo sztuczne" },
+  ar: { steel: "فولاذ إنشائي / فولاذ سهل التشغيل", stainless: "فولاذ مقاوم للصدأ", cast: "حديد زهر رمادي", aluminium: "ألمنيوم", brass: "نحاس أصفر", copper: "نحاس", titanium: "تيتانيوم / سبيكة تيتانيوم", plastic: "بلاستيك" },
+  hi: { steel: "स्ट्रक्चरल / फ्री-कटिंग स्टील", stainless: "स्टेनलेस स्टील", cast: "ग्रे कास्ट आयरन", aluminium: "एल्युमिनियम", brass: "पीतल", copper: "ताँबा", titanium: "टाइटेनियम / टाइटेनियम मिश्रधातु", plastic: "प्लास्टिक" },
 };
 
 const toolText: Record<Lang, Record<string, string>> = {
@@ -1127,6 +1139,15 @@ const toolText: Record<Lang, Record<string, string>> = {
     "turn-internal": "Cuțit de strunjire interioară din carbură", "turn-face": "Cuțit de planare din carbură",
     "turn-groove": "Cuțit de retezare / canelare din carbură", "turn-thread-60": "Cuțit de filetat 60°", "turn-hss": "Cuțit de strung HSS",
   },
+  pl: {
+    "end-carbide": "Frez trzpieniowy VHM", "end-hss": "Frez trzpieniowy HSS", "slot-carbide": "Frez do rowków VHM", "ball-carbide": "Frez kulisty VHM", "face-carbide": "Frez czołowy z płytkami węglikowymi", "spot-carbide": "Nawiertak NC VHM", "center-hss": "Nawiertak HSS", "drill-carbide": "Wiertło kręte VHM", "drill-hss": "Wiertło kręte HSS", "drill-hssco": "Wiertło kręte HSS-Co", "countersink-hss": "Pogłębiacz stożkowy HSS 90°", "countersink-carbide": "Pogłębiacz węglikowy 90°", "counterbore-hss": "Pogłębiacz walcowy HSS z pilotem", "reamer-hss": "Rozwiertak maszynowy HSS", "reamer-carbide": "Rozwiertak maszynowy węglikowy", "turn-rough": "Uniwersalny nóż tokarski węglikowy do obróbki zgrubnej", "turn-finish": "Nóż tokarski węglikowy do wykańczania", "turn-fine": "Nóż węglikowy do dokładnego wykańczania", "turn-internal": "Węglikowy nóż do toczenia wewnętrznego", "turn-face": "Węglikowy nóż do planowania", "turn-groove": "Węglikowy nóż do przecinania / rowkowania", "turn-thread-60": "Nóż do gwintów 60°", "turn-hss": "Nóż tokarski HSS",
+  },
+  ar: {
+    "end-carbide": "قاطع طرفي كربيد صلب", "end-hss": "قاطع طرفي HSS", "slot-carbide": "قاطع مجاري كربيد صلب", "ball-carbide": "قاطع كروي كربيد صلب", "face-carbide": "قاطع تسوية بصفائح كربيد", "spot-carbide": "مثقاب تمركز NC كربيد صلب", "center-hss": "مثقاب مركزي HSS", "drill-carbide": "مثقاب لولبي كربيد صلب", "drill-hss": "مثقاب لولبي HSS", "drill-hssco": "مثقاب لولبي HSS-Co", "countersink-hss": "غاطس مخروطي HSS بزاوية 90°", "countersink-carbide": "غاطس كربيد بزاوية 90°", "counterbore-hss": "غاطس أسطواني HSS بدليل", "reamer-hss": "موسع آلي HSS", "reamer-carbide": "موسع آلي كربيد", "turn-rough": "قلم خراطة خشن عام من الكربيد", "turn-finish": "قلم تشطيب كربيد", "turn-fine": "قلم تشطيب دقيق كربيد", "turn-internal": "قلم خراطة داخلية كربيد", "turn-face": "قلم تسوية وجه كربيد", "turn-groove": "قلم قطع / تخديد كربيد", "turn-thread-60": "قلم قلاوظ 60°", "turn-hss": "قلم خراطة HSS",
+  },
+  hi: {
+    "end-carbide": "सॉलिड कार्बाइड एंड मिल", "end-hss": "HSS एंड मिल", "slot-carbide": "सॉलिड कार्बाइड स्लॉट मिल", "ball-carbide": "सॉलिड कार्बाइड बॉल एंड मिल", "face-carbide": "कार्बाइड इंसर्ट फेस मिल", "spot-carbide": "सॉलिड कार्बाइड NC स्पॉट ड्रिल", "center-hss": "HSS सेंटर ड्रिल", "drill-carbide": "सॉलिड कार्बाइड ट्विस्ट ड्रिल", "drill-hss": "HSS ट्विस्ट ड्रिल", "drill-hssco": "HSS-Co ट्विस्ट ड्रिल", "countersink-hss": "HSS 90° काउंटरसिंक", "countersink-carbide": "कार्बाइड 90° काउंटरसिंक", "counterbore-hss": "पायलट वाला HSS काउंटरबोर", "reamer-hss": "HSS मशीन रीमर", "reamer-carbide": "कार्बाइड मशीन रीमर", "turn-rough": "सामान्य कार्बाइड रफिंग टूल", "turn-finish": "कार्बाइड फिनिशिंग टूल", "turn-fine": "कार्बाइड फाइन फिनिशिंग टूल", "turn-internal": "कार्बाइड इंटरनल टर्निंग टूल", "turn-face": "कार्बाइड फेसिंग टूल", "turn-groove": "कार्बाइड पार्टिंग / ग्रूविंग टूल", "turn-thread-60": "60° थ्रेडिंग टूल", "turn-hss": "HSS टर्निंग टूल",
+  },
 };
 const categoryText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -1218,6 +1239,9 @@ const categoryText: Record<Lang, Record<string, string>> = {
   nl: { Fräser: "Frees", Bohrer: "Boor", Senker: "Verzinkboor", Reibahle: "Ruimer", Drehmeißel: "Draaibeitel" },
   cs: { Fräser: "Fréza", Bohrer: "Vrták", Senker: "Záhlubník", Reibahle: "Výstružník", Drehmeißel: "Soustružnický nůž" },
   ro: { Fräser: "Freză", Bohrer: "Burghiu", Senker: "Teșitor", Reibahle: "Alezor", Drehmeißel: "Cuțit de strung" },
+  pl: { Fräser: "Frez", Bohrer: "Wiertło", Senker: "Pogłębiacz", Reibahle: "Rozwiertak", Drehmeißel: "Nóż tokarski" },
+  ar: { Fräser: "قاطع تفريز", Bohrer: "مثقاب", Senker: "غاطس", Reibahle: "موسع", Drehmeißel: "قلم خراطة" },
+  hi: { Fräser: "मिलिंग कटर", Bohrer: "ड्रिल", Senker: "काउंटरसिंक", Reibahle: "रीमर", Drehmeißel: "टर्निंग टूल" },
 };
 const toolUseText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -1333,6 +1357,9 @@ const toolUseText: Record<Lang, Record<string, string>> = {
   nl: { "turn-rough": "Voordraaien", "turn-finish": "Nadraaien", "turn-fine": "Fijnnadraaien / contouren", "turn-internal": "Binnendraaien", "turn-face": "Vlakdraaien", "turn-groove": "Afsteken / groefsteken", "turn-thread-60": "Metrische schroefdraad" },
   cs: { "turn-rough": "Hrubování", "turn-finish": "Dokončování", "turn-fine": "Jemné dokončování / konturování", "turn-internal": "Vnitřní soustružení", "turn-face": "Čelní soustružení", "turn-groove": "Upichování / zapichování", "turn-thread-60": "Metrický závit" },
   ro: { "turn-rough": "Degroșare", "turn-finish": "Finisare", "turn-fine": "Superfinisare / conturare", "turn-internal": "Strunjire interioară", "turn-face": "Planare", "turn-groove": "Retezare / canelare", "turn-thread-60": "Filet metric" },
+  pl: { "turn-rough": "Toczenie zgrubne", "turn-finish": "Toczenie wykańczające", "turn-fine": "Dokładne wykańczanie / konturowanie", "turn-internal": "Toczenie wewnętrzne", "turn-face": "Planowanie", "turn-groove": "Przecinanie / rowkowanie", "turn-thread-60": "Gwint metryczny" },
+  ar: { "turn-rough": "خراطة خشنة", "turn-finish": "تشطيب", "turn-fine": "تشطيب دقيق / تشغيل محيطي", "turn-internal": "خراطة داخلية", "turn-face": "تسوية الوجه", "turn-groove": "قطع / تخديد", "turn-thread-60": "قلاوظ متري" },
+  hi: { "turn-rough": "रफ टर्निंग", "turn-finish": "फिनिश टर्निंग", "turn-fine": "फाइन फिनिशिंग / कंटूरिंग", "turn-internal": "इंटरनल टर्निंग", "turn-face": "फेसिंग", "turn-groove": "पार्टिंग / ग्रूविंग", "turn-thread-60": "मीट्रिक थ्रेड" },
 };
 const uiText = {
   de: {
@@ -2267,6 +2294,15 @@ const uiText = {
     turnNote: "Clasa plăcuței, geometria, ieșirea sculei și răcirea pot modifica semnificativ valorile. De aceea este afișat un interval inițial prudent.", pitch: "Pasul filetului P", pitchHelp: "La strunjirea filetului, avansul pe rotație trebuie să corespundă exact pasului filetului.", speedHelp: "Viteza muchiei așchietoare față de material. Datele producătorului au prioritate.", feedMillHelp: "Deplasarea pe muchie așchietoare. Calculatorul înmulțește fz cu turația și numărul de dinți.", feedRevHelp: "Deplasarea sculei la o rotație completă a arborelui, utilizată pentru calculul mm/min.",
     withoutLimit: "fără limita mașinii", limitedTo: "Limitat la", calculated: "Calculat", actual: "real", limitIsNotTarget: "Turația maximă a mașinii este o limită, nu o țintă.", helpAria: "Arată explicația", languageSearch: "Caută limba …", noLanguage: "Nu a fost găsită nicio limbă.", cameraRequired: "Este necesar accesul la cameră", cameraPrivacy: "Camera este folosită doar pentru citirea codului sculei. Imaginile nu sunt salvate sau încărcate.", cameraAllow: "Permite camera", cameraStarting: "Camera pornește …", cameraRetry: "Încearcă din nou", cameraError: "Accesul la cameră a fost refuzat sau camera nu este disponibilă.",
   },
+  pl: {
+    toolHelp: "Wpisz nazwę lub grupę narzędzia, np. frez, pogłębiacz lub nóż tokarski.", toolPlaceholder: "np. wiertło, pogłębiacz, nóż tokarski …", noTool: "Nie znaleziono narzędzia.", materialHelp: "Materiał określa zalecany zakres prędkości skrawania.", partDiameterHelp: "Podczas toczenia podaj średnicę przedmiotu w aktualnie obrabianym miejscu.", toolDiameterHelp: "Efektywna średnica narzędzia na krawędzi skrawającej.", teethHelp: "Liczba krawędzi skrawających używana do obliczenia całkowitego posuwu.", oldMachine: "Starsza maszyna ×0,5", oldMachineCopy: "Zmniejsza o połowę prędkość skrawania i posuw", rpmLimit: "Użyj ograniczenia obrotów", rpmLimitCopy: "Techniczny limit maszyny", rpmHelp: "Tylko techniczna górna granica, nie wartość docelowa. Pierwotny zakres pozostaje widoczny.", scanner: "Skanuj kod narzędzia", scannerCopy: "Otwórz skaner demonstracyjny z przykładowym narzędziem", scanTitle: "Skanuj kod narzędzia", scanDescription: "Prototyp: kod testowy symuluje kod na opakowaniu narzędzia.", camera: "Skieruj kamerę na kod QR lub Data Matrix", scanDemo: "Skanuj kod demonstracyjny", recognized: "Rozpoznano narzędzie demonstracyjne", demoWarning: "Dane testowe, nie rzeczywiste dane producenta", manufacturer: "Producent", article: "Numer artykułu", toolName: "Narzędzie", steel: "Stal", aluminium: "Aluminium", titanium: "Tytan", oldActive: "Tryb starszej maszyny jest aktywny: importowane wartości zostaną zmniejszone o połowę.", import: "Użyj wartości producenta", gradeHelp: "Możesz wybrać dokładny gatunek. W przeciwnym razie używany jest ogólny standard materiału.", operation: "Zastosowanie", profile: "Profil parametrów skrawania", profileGroove: "Ostrożny · stabilność przede wszystkim", profileFine: "Wyższa prędkość skrawania · niski posuw", profileRough: "Duże obciążenie · większy posuw", balanced: "Zrównoważony", turnNote: "Gatunek płytki, geometria, wysięg narzędzia i chłodzenie mogą znacznie zmienić wartości. Dlatego wyświetlany jest ostrożny zakres początkowy.", pitch: "Skok gwintu P", pitchHelp: "Podczas toczenia gwintu posuw na obrót musi dokładnie odpowiadać skokowi gwintu.", speedHelp: "Prędkość krawędzi skrawającej względem materiału. Dane producenta mają pierwszeństwo.", feedMillHelp: "Ruch na krawędź skrawającą. Kalkulator mnoży fz przez obroty i liczbę zębów.", feedRevHelp: "Ruch narzędzia podczas jednego pełnego obrotu wrzeciona do obliczenia mm/min.", withoutLimit: "bez limitu maszyny", limitedTo: "Ograniczono do", calculated: "Obliczono", actual: "rzeczywiste", limitIsNotTarget: "Maksymalne obroty maszyny są limitem, a nie celem.", helpAria: "Pokaż wyjaśnienie", languageSearch: "Szukaj języka …", noLanguage: "Nie znaleziono języka.", cameraRequired: "Wymagany dostęp do kamery", cameraPrivacy: "Kamera służy wyłącznie do odczytu kodu narzędzia. Obrazy nie są zapisywane ani przesyłane.", cameraAllow: "Zezwól na kamerę", cameraStarting: "Uruchamianie kamery …", cameraRetry: "Spróbuj ponownie", cameraError: "Odmówiono dostępu do kamery lub kamera jest niedostępna.",
+  },
+  ar: {
+    toolHelp: "أدخل اسم الأداة أو فئتها، مثل قاطع التفريز أو الغاطس أو قلم الخراطة.", toolPlaceholder: "مثال: مثقاب، غاطس، قلم خراطة …", noTool: "لم يتم العثور على أداة.", materialHelp: "تحدد المادة نطاق سرعة القطع الموصى به.", partDiameterHelp: "عند الخراطة، أدخل قطر قطعة العمل عند موضع التشغيل الحالي.", toolDiameterHelp: "القطر الفعلي للأداة عند حافة القطع.", teethHelp: "عدد حواف القطع المستخدمة لحساب التغذية الكلية.", oldMachine: "ماكينة قديمة ×0.5", oldMachineCopy: "تخفض سرعة القطع والتغذية إلى النصف", rpmLimit: "استخدام حد سرعة الدوران", rpmLimitCopy: "الحد التقني للماكينة", rpmHelp: "حد تقني أعلى فقط وليس قيمة مستهدفة. يظل النطاق الأصلي ظاهرًا.", scanner: "مسح رمز الأداة", scannerCopy: "فتح الماسح التجريبي باستخدام أداة نموذجية", scanTitle: "مسح رمز الأداة", scanDescription: "نموذج أولي: يحاكي رمز الاختبار رمزًا على عبوة الأداة.", camera: "وجّه الكاميرا نحو رمز QR أو Data Matrix", scanDemo: "مسح الرمز التجريبي", recognized: "تم التعرف على الأداة التجريبية", demoWarning: "بيانات اختبار وليست بيانات حقيقية للشركة المصنعة", manufacturer: "الشركة المصنعة", article: "رقم الصنف", toolName: "الأداة", steel: "فولاذ", aluminium: "ألمنيوم", titanium: "تيتانيوم", oldActive: "وضع الماكينة القديمة نشط: ستُخفض القيم المستوردة إلى النصف.", import: "استخدام قيم الشركة المصنعة", gradeHelp: "يمكنك تحديد درجة المادة بدقة. وإلا فسيُستخدم المعيار العام للمادة.", operation: "الاستخدام", profile: "ملف بيانات القطع", profileGroove: "محافظ · الثبات أولًا", profileFine: "سرعة قطع أعلى · تغذية منخفضة", profileRough: "حمل مرتفع · تغذية أكبر", balanced: "متوازن", turnNote: "يمكن لدرجة الصفيحة والهندسة وبروز الأداة والتبريد أن تغيّر القيم كثيرًا. لذلك يُعرض نطاق بداية محافظ.", pitch: "خطوة القلاوظ P", pitchHelp: "عند خراطة القلاوظ يجب أن تتطابق التغذية لكل دورة تمامًا مع خطوة القلاوظ.", speedHelp: "سرعة حافة القطع بالنسبة للمادة. لبيانات الشركة المصنعة الأولوية.", feedMillHelp: "الحركة لكل حافة قطع. تضرب الحاسبة fz في سرعة الدوران وعدد الأسنان.", feedRevHelp: "حركة الأداة خلال دورة كاملة للمغزل لحساب mm/min.", withoutLimit: "من دون حد الماكينة", limitedTo: "محدود إلى", calculated: "محسوب", actual: "فعلي", limitIsNotTarget: "السرعة القصوى للماكينة حد وليست هدفًا.", helpAria: "عرض الشرح", languageSearch: "البحث عن لغة …", noLanguage: "لم يتم العثور على لغة.", cameraRequired: "يلزم السماح بالكاميرا", cameraPrivacy: "تُستخدم الكاميرا فقط لقراءة رمز الأداة. لا تُحفظ الصور ولا تُرفع.", cameraAllow: "السماح بالكاميرا", cameraStarting: "جارٍ تشغيل الكاميرا …", cameraRetry: "إعادة المحاولة", cameraError: "تم رفض الوصول إلى الكاميرا أو أن الكاميرا غير متاحة.",
+  },
+  hi: {
+    toolHelp: "औज़ार का नाम या समूह लिखें, जैसे मिलिंग कटर, काउंटरसिंक या टर्निंग टूल।", toolPlaceholder: "जैसे ड्रिल, काउंटरसिंक, टर्निंग टूल …", noTool: "कोई औज़ार नहीं मिला।", materialHelp: "सामग्री सुझाई गई कटिंग स्पीड की सीमा तय करती है।", partDiameterHelp: "टर्निंग करते समय मौजूदा मशीनिंग स्थान पर वर्कपीस का व्यास दर्ज करें।", toolDiameterHelp: "कटिंग एज पर औज़ार का प्रभावी व्यास।", teethHelp: "कुल फीड की गणना में उपयोग होने वाली कटिंग एज की संख्या।", oldMachine: "पुरानी मशीन ×0.5", oldMachineCopy: "कटिंग स्पीड और फीड को आधा करता है", rpmLimit: "RPM सीमा का उपयोग करें", rpmLimitCopy: "मशीन की तकनीकी सीमा", rpmHelp: "केवल तकनीकी ऊपरी सीमा, लक्ष्य मान नहीं। मूल सीमा दिखाई देती रहती है।", scanner: "औज़ार कोड स्कैन करें", scannerCopy: "उदाहरण औज़ार के साथ डेमो स्कैनर खोलें", scanTitle: "औज़ार कोड स्कैन करें", scanDescription: "प्रोटोटाइप: टेस्ट कोड औज़ार की पैकेजिंग पर मौजूद कोड का अनुकरण करता है।", camera: "कैमरा QR या Data Matrix कोड की ओर रखें", scanDemo: "डेमो कोड स्कैन करें", recognized: "डेमो औज़ार पहचाना गया", demoWarning: "टेस्ट डेटा, वास्तविक निर्माता डेटा नहीं", manufacturer: "निर्माता", article: "आइटम नंबर", toolName: "औज़ार", steel: "स्टील", aluminium: "एल्युमिनियम", titanium: "टाइटेनियम", oldActive: "पुरानी मशीन मोड सक्रिय है: आयातित मान आधे हो जाएंगे।", import: "निर्माता के मान उपयोग करें", gradeHelp: "आप सटीक सामग्री ग्रेड चुन सकते हैं। अन्यथा सामान्य सामग्री मानक उपयोग होगा।", operation: "उपयोग", profile: "कटिंग डेटा प्रोफ़ाइल", profileGroove: "सुरक्षित · स्थिरता पहले", profileFine: "ऊँची कटिंग स्पीड · कम फीड", profileRough: "ऊँचा भार · अधिक फीड", balanced: "संतुलित", turnNote: "इंसर्ट ग्रेड, ज्यामिति, टूल ओवरहैंग और कूलिंग मानों को काफी बदल सकते हैं। इसलिए सुरक्षित शुरुआती सीमा दिखाई जाती है।", pitch: "थ्रेड पिच P", pitchHelp: "थ्रेड टर्निंग में प्रति चक्कर फीड बिल्कुल थ्रेड पिच के बराबर होना चाहिए।", speedHelp: "सामग्री के सापेक्ष कटिंग एज की गति। निर्माता डेटा को प्राथमिकता दें।", feedMillHelp: "प्रति कटिंग एज गति। कैलकुलेटर fz को RPM और दाँतों की संख्या से गुणा करता है।", feedRevHelp: "mm/min की गणना के लिए स्पिंडल के एक पूरे चक्कर में औज़ार की गति।", withoutLimit: "मशीन सीमा के बिना", limitedTo: "सीमित", calculated: "गणना", actual: "वास्तविक", limitIsNotTarget: "मशीन का अधिकतम RPM सीमा है, लक्ष्य नहीं।", helpAria: "व्याख्या दिखाएँ", languageSearch: "भाषा खोजें …", noLanguage: "कोई भाषा नहीं मिली।", cameraRequired: "कैमरा अनुमति आवश्यक है", cameraPrivacy: "कैमरा केवल औज़ार कोड पढ़ने के लिए उपयोग होता है। चित्र सहेजे या अपलोड नहीं किए जाते।", cameraAllow: "कैमरा अनुमति दें", cameraStarting: "कैमरा शुरू हो रहा है …", cameraRetry: "फिर प्रयास करें", cameraError: "कैमरा अनुमति अस्वीकार कर दी गई या कैमरा उपलब्ध नहीं है।",
+  },
 } as const;
 
 const materialGrades: Record<
@@ -2788,7 +2824,7 @@ const normalizeSearch = (value: string) =>
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/ß/g, "ss")
     .replace(/ı/g, "i")
-    .replace(/[^a-z0-9а-яё\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]+/gi, " ")
+    .replace(/[^a-z0-9а-яё\u0600-\u06ff\u0900-\u097f\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]+/gi, " ")
     .trim();
 
 const languageOptions: {
@@ -2889,18 +2925,24 @@ const languageOptions: {
   },
   { id: "cs", label: "Čeština", code: "CZ", aliases: "cs cz ces cze czech tschechisch čeština cestina tchèque ceco" },
   { id: "ro", label: "Română", code: "RO", aliases: "ro ron rum romanian rumänisch rumaenisch română romana roumain rumeno" },
+  { id: "pl", label: "Polski", code: "PL", aliases: "pl pol polish polnisch polski polonais polacco" },
+  { id: "ar", label: "العربية", code: "AR", aliases: "ar ara arabic arabisch العربية عربي arabe arabo" },
+  { id: "hi", label: "हिन्दी", code: "IN", aliases: "hi hin hindi indisch हिन्दी हिंदी india indien" },
 ];
 
 const languageSortNames: Record<Lang, string> = {
   sq: "Albanisch",
+  ar: "Arabisch",
   zh: "Chinesisch",
   de: "Deutsch",
   en: "Englisch",
   fr: "Französisch",
+  hi: "Hindi",
   it: "Italienisch",
   ja: "Japanisch",
   ko: "Koreanisch",
   nl: "Niederländisch",
+  pl: "Polnisch",
   pt: "Portugiesisch",
   ro: "Rumänisch",
   ru: "Russisch",
@@ -3052,6 +3094,9 @@ export default function Home() {
     nl: "nl-NL",
     cs: "cs-CZ",
     ro: "ro-RO",
+    pl: "pl-PL",
+    ar: "ar-SA",
+    hi: "hi-IN",
   } satisfies Record<Lang, string>)[lang];
   const units = ({
     de: { rpm: "U/min", rev: "mm/U", tooth: "mm/Z", minute: "mm/min" },
@@ -3071,6 +3116,9 @@ export default function Home() {
     nl: { rpm: "omw/min", rev: "mm/omw", tooth: "mm/tand", minute: "mm/min" },
     cs: { rpm: "ot/min", rev: "mm/ot", tooth: "mm/zub", minute: "mm/min" },
     ro: { rpm: "rot/min", rev: "mm/rot", tooth: "mm/dinte", minute: "mm/min" },
+    pl: { rpm: "obr/min", rev: "mm/obr", tooth: "mm/ostrze", minute: "mm/min" },
+    ar: { rpm: "دورة/دقيقة", rev: "مم/دورة", tooth: "مم/سن", minute: "مم/دقيقة" },
+    hi: { rpm: "चक्र/मिनट", rev: "मिमी/चक्र", tooth: "मिमी/दाँत", minute: "मिमी/मिनट" },
   } satisfies Record<
     Lang,
     { rpm: string; rev: string; tooth: string; minute: string }
@@ -3257,7 +3305,7 @@ export default function Home() {
   useEffect(() => () => stopCamera(), []);
 
   return (
-    <main className="min-h-screen px-4 py-5 sm:px-7 sm:py-8">
+    <main dir={lang === "ar" ? "rtl" : "ltr"} className="min-h-screen px-4 py-5 sm:px-7 sm:py-8">
       <div className="mx-auto max-w-6xl">
         <header className="mb-6 flex items-center justify-between border-b pb-5">
           <div className="flex items-center gap-3">
