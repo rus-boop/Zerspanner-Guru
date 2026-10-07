@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko";
+type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl";
 type Tool = {
   id: string;
   label: string;
@@ -577,6 +577,40 @@ const words = {
     warning: "이 값은 시작값입니다. 공구 제조사 데이터, 장비, 고정 상태, 냉각 및 공작물 안정성을 우선하십시오.",
     language: "언어 선택",
   },
+  it: {
+    subtitle: "Parametri di taglio per l’officina", live: "Calcolo in tempo reale",
+    setup: "Definisci la lavorazione", setupCopy: "Utensile e materiale determinano i valori iniziali.",
+    tool: "Cerca utensile", material: "Materiale", diameterTool: "Diametro utensile",
+    diameterPart: "Diametro pezzo", teeth: "Numero di denti z", auto: "Aggiorna automaticamente i valori",
+    autoCopy: "Consigli adatti all’utensile e al materiale selezionati", limit: "Usa il limite di giri",
+    limitCopy: "Adatto a macchine meno recenti", maxRpm: "Numero di giri massimo del mandrino",
+    advanced: "Opzioni avanzate", grade: "Grado esatto del materiale", standard: "Standard / non specificato",
+    cutting: "Parametri di taglio", cuttingCopy: "Proposti automaticamente e modificabili secondo necessità.",
+    speed: "Velocità di taglio vc", feedTooth: "Avanzamento per dente fz", feedRev: "Avanzamento per giro f",
+    reset: "Ripristina i valori consigliati", result: "Risultato", rpm: "Numero di giri mandrino n",
+    feed: "Velocità di avanzamento vf", range: "Intervallo consigliato", gentle: "Prudente",
+    start: "Valore iniziale", productive: "Produttivo", toolSummary: "Utensile", materialSummary: "Materiale",
+    perRev: "Avanzamento/giro", important: "Importante:",
+    warning: "Questi sono valori iniziali. Hanno priorità i dati del produttore, la macchina, il serraggio, il raffreddamento e la stabilità del pezzo.",
+    language: "Scegli la lingua",
+  },
+  nl: {
+    subtitle: "Snijgegevens voor de werkplaats", live: "Live berekening",
+    setup: "Bewerking instellen", setupCopy: "Gereedschap en materiaal bepalen de beginwaarden.",
+    tool: "Gereedschap zoeken", material: "Materiaal", diameterTool: "Gereedschapsdiameter",
+    diameterPart: "Werkstukdiameter", teeth: "Aantal tanden z", auto: "Waarden automatisch bijwerken",
+    autoCopy: "Aanbevelingen passend bij het gekozen gereedschap en materiaal", limit: "Toerentalbegrenzing gebruiken",
+    limitCopy: "Geschikt voor oudere machines", maxRpm: "Maximaal spiltoerental",
+    advanced: "Geavanceerde opties", grade: "Exacte materiaalkwaliteit", standard: "Standaard / niet opgegeven",
+    cutting: "Snijgegevens", cuttingCopy: "Worden automatisch voorgesteld en kunnen worden aangepast.",
+    speed: "Snijsnelheid vc", feedTooth: "Voeding per tand fz", feedRev: "Voeding per omwenteling f",
+    reset: "Aanbevolen waarden herstellen", result: "Resultaat", rpm: "Spiltoerental n",
+    feed: "Voedingssnelheid vf", range: "Aanbevolen bereik", gentle: "Voorzichtig",
+    start: "Beginwaarde", productive: "Productief", toolSummary: "Gereedschap", materialSummary: "Materiaal",
+    perRev: "Voeding/omw", important: "Belangrijk:",
+    warning: "Dit zijn beginwaarden. Gegevens van de fabrikant, machine, opspanning, koeling en werkstukstabiliteit hebben voorrang.",
+    language: "Taal kiezen",
+  },
 } as const;
 
 const materialText: Record<Lang, Record<string, string>> = {
@@ -701,6 +735,8 @@ const materialText: Record<Lang, Record<string, string>> = {
     titanium: "티타늄 / 티타늄 합금",
     plastic: "플라스틱",
   },
+  it: { steel: "Acciaio da costruzione / automatico", stainless: "Acciaio inox", cast: "Ghisa grigia", aluminium: "Alluminio", brass: "Ottone", copper: "Rame", titanium: "Titanio / lega di titanio", plastic: "Plastica" },
+  nl: { steel: "Constructiestaal / automatenstaal", stainless: "Roestvast staal", cast: "Grijs gietijzer", aluminium: "Aluminium", brass: "Messing", copper: "Koper", titanium: "Titanium / titaniumlegering", plastic: "Kunststof" },
 };
 
 const toolText: Record<Lang, Record<string, string>> = {
@@ -1005,6 +1041,34 @@ const toolText: Record<Lang, Record<string, string>> = {
     "turn-thread-60": "60° 나사 가공 바이트",
     "turn-hss": "HSS 선삭 바이트",
   },
+  it: {
+    "end-carbide": "Fresa cilindrica in metallo duro integrale", "end-hss": "Fresa cilindrica HSS",
+    "slot-carbide": "Fresa per cave in metallo duro integrale", "ball-carbide": "Fresa sferica in metallo duro integrale",
+    "face-carbide": "Fresa a spianare con inserti in metallo duro", "spot-carbide": "Punta NC in metallo duro integrale",
+    "center-hss": "Punta da centro HSS", "drill-carbide": "Punta elicoidale in metallo duro integrale",
+    "drill-hss": "Punta elicoidale HSS", "drill-hssco": "Punta elicoidale HSS-Co",
+    "countersink-hss": "Svasatore HSS 90°", "countersink-carbide": "Svasatore in metallo duro 90°",
+    "counterbore-hss": "Lamatura HSS con guida", "reamer-hss": "Alesatore a macchina HSS",
+    "reamer-carbide": "Alesatore a macchina in metallo duro", "turn-rough": "Utensile universale da sgrossatura in metallo duro",
+    "turn-finish": "Utensile da finitura in metallo duro", "turn-fine": "Utensile da superfinitura in metallo duro",
+    "turn-internal": "Utensile per tornitura interna in metallo duro", "turn-face": "Utensile per sfacciatura in metallo duro",
+    "turn-groove": "Utensile da troncatura / scanalatura in metallo duro", "turn-thread-60": "Utensile per filettatura 60°",
+    "turn-hss": "Utensile da tornitura HSS",
+  },
+  nl: {
+    "end-carbide": "Volhardmetalen schachtfrees", "end-hss": "HSS-schachtfrees",
+    "slot-carbide": "Volhardmetalen spiebaanfrees", "ball-carbide": "Volhardmetalen kogelfrees",
+    "face-carbide": "Vlakfrees met hardmetalen wisselplaten", "spot-carbide": "Volhardmetalen NC-aanboor",
+    "center-hss": "HSS-centerboor", "drill-carbide": "Volhardmetalen spiraalboor",
+    "drill-hss": "HSS-spiraalboor", "drill-hssco": "HSS-Co-spiraalboor",
+    "countersink-hss": "HSS-verzinkboor 90°", "countersink-carbide": "Hardmetalen verzinkboor 90°",
+    "counterbore-hss": "HSS-vlakverzinkboor met geleidepen", "reamer-hss": "HSS-machineruimer",
+    "reamer-carbide": "Hardmetalen machineruimer", "turn-rough": "Universele hardmetalen voordraaibeitel",
+    "turn-finish": "Hardmetalen nadraaibeitel", "turn-fine": "Hardmetalen fijnnadraaibeitel",
+    "turn-internal": "Hardmetalen binnenbeitel", "turn-face": "Hardmetalen vlakbeitel",
+    "turn-groove": "Hardmetalen afsteek- / groefbeitel", "turn-thread-60": "60° schroefdraadbeitel",
+    "turn-hss": "HSS-draaibeitel",
+  },
 };
 const categoryText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -1092,6 +1156,8 @@ const categoryText: Record<Lang, Record<string, string>> = {
     Reibahle: "리머",
     Drehmeißel: "선삭 바이트",
   },
+  it: { Fräser: "Fresa", Bohrer: "Punta", Senker: "Svasatore", Reibahle: "Alesatore", Drehmeißel: "Utensile da tornitura" },
+  nl: { Fräser: "Frees", Bohrer: "Boor", Senker: "Verzinkboor", Reibahle: "Ruimer", Drehmeißel: "Draaibeitel" },
 };
 const toolUseText: Record<Lang, Record<string, string>> = {
   de: {},
@@ -1203,6 +1269,8 @@ const toolUseText: Record<Lang, Record<string, string>> = {
     "turn-groove": "절단 / 홈가공",
     "turn-thread-60": "미터 나사",
   },
+  it: { "turn-rough": "Sgrossatura", "turn-finish": "Finitura", "turn-fine": "Superfinitura / contornatura", "turn-internal": "Tornitura interna", "turn-face": "Sfacciatura", "turn-groove": "Troncatura / scanalatura", "turn-thread-60": "Filettatura metrica" },
+  nl: { "turn-rough": "Voordraaien", "turn-finish": "Nadraaien", "turn-fine": "Fijnnadraaien / contouren", "turn-internal": "Binnendraaien", "turn-face": "Vlakdraaien", "turn-groove": "Afsteken / groefsteken", "turn-thread-60": "Metrische schroefdraad" },
 };
 const uiText = {
   de: {
@@ -2057,6 +2125,66 @@ const uiText = {
     cameraRetry: "다시 시도",
     cameraError: "카메라 접근이 거부되었거나 카메라를 사용할 수 없습니다.",
   },
+  it: {
+    toolHelp: "Inserisci il nome o il gruppo dell’utensile, ad esempio fresa, svasatore o utensile da tornitura.",
+    toolPlaceholder: "ad es. punta, svasatore, utensile da tornitura …", noTool: "Nessun utensile trovato.",
+    materialHelp: "Il materiale determina l’intervallo consigliato della velocità di taglio.",
+    partDiameterHelp: "Nella tornitura inserisci il diametro del pezzo nel punto attualmente lavorato.",
+    toolDiameterHelp: "Diametro effettivo dell’utensile sul tagliente.", teethHelp: "Numero di taglienti usato per calcolare l’avanzamento totale.",
+    oldMachine: "Macchina meno recente ×0,5", oldMachineCopy: "Dimezza velocità di taglio e avanzamento",
+    rpmLimit: "Usa il limite di giri", rpmLimitCopy: "Limite tecnico della macchina",
+    rpmHelp: "È solo un limite tecnico superiore, non un valore obiettivo. L’intervallo originale resta visibile.",
+    scanner: "Scansiona il codice utensile", scannerCopy: "Apri lo scanner dimostrativo con un utensile di esempio",
+    scanTitle: "Scansiona il codice utensile", scanDescription: "Prototipo: il codice di prova simula un codice sulla confezione dell’utensile.",
+    camera: "Inquadra il codice QR o Data Matrix", scanDemo: "Scansiona il codice demo", recognized: "Utensile demo riconosciuto",
+    demoWarning: "Dati di prova, non dati reali del produttore", manufacturer: "Produttore", article: "Codice articolo",
+    toolName: "Utensile", steel: "Acciaio", aluminium: "Alluminio", titanium: "Titanio",
+    oldActive: "La modalità macchina meno recente è attiva: i valori importati saranno dimezzati.", import: "Usa i valori del produttore",
+    gradeHelp: "Puoi selezionare il grado esatto. Altrimenti viene usato lo standard generale del materiale.",
+    operation: "Impiego", profile: "Profilo dei parametri di taglio", profileGroove: "Prudente · priorità alla stabilità",
+    profileFine: "Velocità di taglio più alta · avanzamento basso", profileRough: "Carico elevato · avanzamento maggiore", balanced: "Bilanciato",
+    turnNote: "Grado dell’inserto, geometria, sporgenza e raffreddamento possono modificare molto i valori. Perciò viene mostrato un intervallo iniziale prudente.",
+    pitch: "Passo della filettatura P", pitchHelp: "Nella filettatura al tornio, l’avanzamento per giro deve corrispondere esattamente al passo.",
+    speedHelp: "Velocità del tagliente rispetto al materiale. I dati del produttore hanno priorità.",
+    feedMillHelp: "Spostamento per tagliente. Il calcolatore moltiplica fz per il numero di giri e di denti.",
+    feedRevHelp: "Spostamento dell’utensile per un giro completo del mandrino, usato per calcolare mm/min.",
+    withoutLimit: "senza limite macchina", limitedTo: "Limitato a", calculated: "Calcolato", actual: "effettivo",
+    limitIsNotTarget: "Il numero di giri massimo della macchina è un limite, non un obiettivo.", helpAria: "Mostra spiegazione",
+    languageSearch: "Cerca lingua …", noLanguage: "Nessuna lingua trovata.", cameraRequired: "È necessario l’accesso alla fotocamera",
+    cameraPrivacy: "La fotocamera viene usata solo per leggere il codice utensile. Le immagini non vengono salvate né caricate.",
+    cameraAllow: "Consenti fotocamera", cameraStarting: "Avvio fotocamera …", cameraRetry: "Riprova",
+    cameraError: "L’accesso alla fotocamera è stato negato o la fotocamera non è disponibile.",
+  },
+  nl: {
+    toolHelp: "Voer de naam of groep van het gereedschap in, bijvoorbeeld frees, verzinkboor of draaibeitel.",
+    toolPlaceholder: "bijv. boor, verzinkboor, draaibeitel …", noTool: "Geen gereedschap gevonden.",
+    materialHelp: "Het materiaal bepaalt het aanbevolen snijsnelheidsbereik.",
+    partDiameterHelp: "Voer bij draaien de werkstukdiameter in op de plaats die wordt bewerkt.",
+    toolDiameterHelp: "Effectieve gereedschapsdiameter bij de snijkant.", teethHelp: "Aantal snijkanten voor de berekening van de totale voeding.",
+    oldMachine: "Oudere machine ×0,5", oldMachineCopy: "Halveert de snijsnelheid en voeding",
+    rpmLimit: "Toerentalbegrenzing gebruiken", rpmLimitCopy: "Technische grens van de machine",
+    rpmHelp: "Alleen een technische bovengrens, geen streefwaarde. Het oorspronkelijke bereik blijft zichtbaar.",
+    scanner: "Gereedschapscode scannen", scannerCopy: "Open de demoscanner met een voorbeeldgereedschap",
+    scanTitle: "Gereedschapscode scannen", scanDescription: "Prototype: de testcode simuleert een code op de gereedschapsverpakking.",
+    camera: "Richt de camera op de QR- of Data Matrix-code", scanDemo: "Democode scannen", recognized: "Demogereedschap herkend",
+    demoWarning: "Testgegevens, geen echte fabrikantgegevens", manufacturer: "Fabrikant", article: "Artikelnummer",
+    toolName: "Gereedschap", steel: "Staal", aluminium: "Aluminium", titanium: "Titanium",
+    oldActive: "De modus voor oudere machines is actief: geïmporteerde waarden worden gehalveerd.", import: "Fabrikantwaarden gebruiken",
+    gradeHelp: "Je kunt de exacte materiaalkwaliteit kiezen. Anders wordt de algemene materiaalstandaard gebruikt.",
+    operation: "Toepassing", profile: "Snijgegevensprofiel", profileGroove: "Voorzichtig · stabiliteit eerst",
+    profileFine: "Hogere snijsnelheid · lage voeding", profileRough: "Hoge belasting · grotere voeding", balanced: "Gebalanceerd",
+    turnNote: "Plaatkwaliteit, geometrie, uitsteeklengte en koeling kunnen de waarden sterk veranderen. Daarom wordt een voorzichtig beginbereik getoond.",
+    pitch: "Schroefdraadspoed P", pitchHelp: "Bij schroefdraaddraaien moet de voeding per omwenteling exact overeenkomen met de spoed.",
+    speedHelp: "Snelheid van de snijkant ten opzichte van het materiaal. Fabrikantgegevens hebben voorrang.",
+    feedMillHelp: "Verplaatsing per snijkant. De calculator vermenigvuldigt fz met toerental en aantal tanden.",
+    feedRevHelp: "Verplaatsing van het gereedschap per volledige spilomwenteling voor de berekening van mm/min.",
+    withoutLimit: "zonder machinebegrenzing", limitedTo: "Begrensd op", calculated: "Berekend", actual: "werkelijk",
+    limitIsNotTarget: "Het maximale machinetoerental is een grens, geen doelwaarde.", helpAria: "Uitleg tonen",
+    languageSearch: "Taal zoeken …", noLanguage: "Geen taal gevonden.", cameraRequired: "Cameratoegang vereist",
+    cameraPrivacy: "De camera wordt alleen gebruikt om de gereedschapscode te lezen. Beelden worden niet opgeslagen of geüpload.",
+    cameraAllow: "Camera toestaan", cameraStarting: "Camera wordt gestart …", cameraRetry: "Opnieuw proberen",
+    cameraError: "Cameratoegang is geweigerd of de camera is niet beschikbaar.",
+  },
 } as const;
 
 const materialGrades: Record<
@@ -2665,6 +2793,18 @@ const languageOptions: {
     code: "KR",
     aliases: "ko kr kor korean koreanisch 한국어 한국 hangug-eo coréen koreanska korece",
   },
+  {
+    id: "it",
+    label: "Italiano",
+    code: "IT",
+    aliases: "it ita italian italienisch italiano italien italienska italyanca",
+  },
+  {
+    id: "nl",
+    label: "Nederlands",
+    code: "NL",
+    aliases: "nl nld dut dutch niederländisch niederlaendisch nederlands holländisch hollaendisch hollandais olandese",
+  },
 ];
 
 const languageSortNames: Record<Lang, string> = {
@@ -2673,8 +2813,10 @@ const languageSortNames: Record<Lang, string> = {
   de: "Deutsch",
   en: "Englisch",
   fr: "Französisch",
+  it: "Italienisch",
   ja: "Japanisch",
   ko: "Koreanisch",
+  nl: "Niederländisch",
   pt: "Portugiesisch",
   ru: "Russisch",
   sv: "Schwedisch",
@@ -2820,6 +2962,8 @@ export default function Home() {
     vi: "vi-VN",
     fr: "fr-FR",
     ko: "ko-KR",
+    it: "it-IT",
+    nl: "nl-NL",
   } satisfies Record<Lang, string>)[lang];
   const units = ({
     de: { rpm: "U/min", rev: "mm/U", tooth: "mm/Z", minute: "mm/min" },
@@ -2835,6 +2979,8 @@ export default function Home() {
     vi: { rpm: "vòng/phút", rev: "mm/vòng", tooth: "mm/răng", minute: "mm/phút" },
     fr: { rpm: "tr/min", rev: "mm/tr", tooth: "mm/dent", minute: "mm/min" },
     ko: { rpm: "회/분", rev: "mm/회", tooth: "mm/날", minute: "mm/분" },
+    it: { rpm: "giri/min", rev: "mm/giro", tooth: "mm/dente", minute: "mm/min" },
+    nl: { rpm: "omw/min", rev: "mm/omw", tooth: "mm/tand", minute: "mm/min" },
   } satisfies Record<
     Lang,
     { rpm: string; rev: string; tooth: string; minute: string }
