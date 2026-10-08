@@ -212,3 +212,24 @@ html[data-surface="navy"]{--surface-panel:#aebfd3;--surface-control:#f9fbfd}
 .current-theme-preview strong{overflow:hidden;color:#29485d;text-overflow:ellipsis;white-space:nowrap}
 .current-theme-preview i{display:block;width:15px;height:15px;flex:none;border:1px solid #9eb8c8;border-radius:50%}
 .theme-options button{font-size:11px}
+
+.save-theme-button{
+  display:flex;align-items:center;justify-content:center;gap:7px;width:100%;min-height:42px;
+  margin-top:10px;border:1px solid #57a8c9;border-radius:11px;background:#e8f6fc;
+  color:#17668c;font-size:12px;font-weight:800;
+}
+.save-theme-button:hover{background:#d8eef9}
+.save-theme-button:disabled{border-color:#c9d9e2;background:#f2f6f8;color:#879ba8;cursor:default}
+.saved-themes{display:grid;gap:5px;margin-top:10px;padding-top:5px;border-top:1px solid #d8e8f1}
+.saved-theme-row{display:grid;grid-template-columns:1fr 38px;gap:5px}
+.saved-theme-apply{
+  display:grid;grid-template-columns:46px 1fr;align-items:center;gap:9px;min-height:42px;
+  border:1px solid #c7dce8;border-radius:10px;background:#fff;padding:5px 8px;
+  color:#29485d;text-align:left;font-size:11px;font-weight:700;
+}
+.saved-theme-apply:hover{border-color:#6eafce;background:#f4fbff}
+.saved-theme-delete{
+  display:grid;place-items:center;border:1px solid #ebc5ca;border-radius:10px;
+  background:#fff7f8;color:#bd5260;
+}
+.saved-theme-delete:hover{background:#ffe9ec;color:#9e2635}
