@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  BookmarkPlus,
   Camera,
   Check,
   ChevronDown,
@@ -14,6 +15,7 @@ import {
   RotateCw,
   Search,
   ShieldCheck,
+  Trash2,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
@@ -48,6 +50,7 @@ import {
 
 type Mode = "mill" | "drill" | "turn";
 type ThemeCategory = "primary" | "secondary" | "complementary";
+type SavedTheme = { id: string; primary: Theme; secondary: SurfaceTheme };
 type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "black" | "white" | "cyan" | "pink" | "brown" | "navy";
 type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "cyan" | "pink" | "brown" | "navy";
 
@@ -3138,6 +3141,7 @@ export default function Home() {
   const [theme, setTheme] = useState<Theme>("standard");
   const [surfaceTheme, setSurfaceTheme] = useState<SurfaceTheme>("white");
   const [themeCategory, setThemeCategory] = useState<ThemeCategory>("primary");
+  const [savedThemes, setSavedThemes] = useState<SavedTheme[]>([]);
   const filteredLanguages = languageOptions
     .filter((option) => languageMatches(option, languageQuery))
     .sort((left, right) =>
@@ -3272,6 +3276,30 @@ export default function Home() {
     setSurfaceTheme(nextSurface);
     localStorage.setItem("zerspaner-surface", nextSurface);
     document.documentElement.dataset.surface = nextSurface;
+  };
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem("zerspaner-saved-themes") ?? "[]");
+      if (Array.isArray(stored)) setSavedThemes(stored.slice(0, 12));
+    } catch {
+      setSavedThemes([]);
+    }
+  }, []);
+  const saveCurrentTheme = () => {
+    const id = `${theme}-${surfaceTheme}`;
+    setSavedThemes((current) => {
+      if (current.some((item) => item.id === id)) return current;
+      const next = [...current, { id, primary: theme, secondary: surfaceTheme }].slice(-12);
+      localStorage.setItem("zerspaner-saved-themes", JSON.stringify(next));
+      return next;
+    });
+  };
+  const removeSavedTheme = (id: string) => {
+    setSavedThemes((current) => {
+      const next = current.filter((item) => item.id !== id);
+      localStorage.setItem("zerspaner-saved-themes", JSON.stringify(next));
+      return next;
+    });
   };
   const changeComplementaryTheme = (primary: Theme, secondary: SurfaceTheme) => {
     changeTheme(primary);
@@ -3585,6 +3613,40 @@ export default function Home() {
                         );
                       })}
                     </div>
+                    <button
+                      type="button"
+                      className="save-theme-button"
+                      disabled={savedThemes.some((item) => item.id === `${theme}-${surfaceTheme}`)}
+                      onClick={saveCurrentTheme}
+                    >
+                      <BookmarkPlus size={17} />
+                      {savedThemes.some((item) => item.id === `${theme}-${surfaceTheme}`)
+                        ? "Kombination gespeichert"
+                        : "Aktuelle Kombination speichern"}
+                    </button>
+                    {savedThemes.length > 0 && (
+                      <div className="saved-themes">
+                        <span className="theme-group-label">Gespeichert</span>
+                        {savedThemes.map((item) => {
+                          const primary = themeOptions.find((option) => option.id === item.primary);
+                          const secondary = surfaceOptions.find((option) => option.id === item.secondary);
+                          return (
+                            <div key={item.id} className="saved-theme-row">
+                              <button type="button" className="saved-theme-apply" onClick={() => changeComplementaryTheme(item.primary, item.secondary)}>
+                                <span className="pair-swatch">
+                                  <i style={{ background: primary?.colors[0] }} />
+                                  <i style={{ background: secondary?.color }} />
+                                </span>
+                                <span>{primary?.label} · {secondary?.label}</span>
+                              </button>
+                              <button type="button" className="saved-theme-delete" aria-label="Gespeicherte Kombination löschen" onClick={() => removeSavedTheme(item.id)}>
+                                <Trash2 size={16} />
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 )}
               </PopoverContent>
