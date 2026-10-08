@@ -46,7 +46,7 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
+type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi" | "bin";
 type Tool = {
   id: string;
   label: string;
@@ -72,7 +72,18 @@ const materials = [
   { id: "plastic", label: "Kunststoff" },
 ];
 
+const toBinary = (value: string) =>
+  Array.from(new TextEncoder().encode(value))
+    .map((byte) => byte.toString(2).padStart(8, "0"))
+    .join(" ");
+
+const binaryRecord = <T extends Record<string, string>>(source: T): T =>
+  Object.fromEntries(
+    Object.entries(source).map(([key, value]) => [key, toBinary(value)]),
+  ) as T;
+
 const words = {
+  bin: null as never,
   de: {
     subtitle: "Schnittdaten für die Werkstatt",
     live: "Live berechnet",
@@ -652,6 +663,7 @@ const words = {
 } as const;
 
 const materialText: Record<Lang, Record<string, string>> = {
+  bin: {},
   de: {},
   en: {
     steel: "Structural / free-cutting steel",
@@ -783,6 +795,7 @@ const materialText: Record<Lang, Record<string, string>> = {
 };
 
 const toolText: Record<Lang, Record<string, string>> = {
+  bin: {},
   de: {},
   en: {
     "end-carbide": "Solid-carbide end mill",
@@ -1149,6 +1162,7 @@ const toolText: Record<Lang, Record<string, string>> = {
   },
 };
 const categoryText: Record<Lang, Record<string, string>> = {
+  bin: {},
   de: {},
   en: {
     Fräser: "Milling cutter",
@@ -1361,6 +1375,7 @@ const toolUseText: Record<Lang, Record<string, string>> = {
   hi: { "turn-rough": "रफ टर्निंग", "turn-finish": "फिनिश टर्निंग", "turn-fine": "फाइन फिनिशिंग / कंटूरिंग", "turn-internal": "इंटरनल टर्निंग", "turn-face": "फेसिंग", "turn-groove": "पार्टिंग / ग्रूविंग", "turn-thread-60": "मीट्रिक थ्रेड" },
 };
 const uiText = {
+  bin: null as never,
   de: {
     toolHelp:
       "Tippe einen Werkzeugnamen oder eine Gruppe ein, zum Beispiel Fräser, Senker oder Drehmeißel.",
@@ -2833,6 +2848,12 @@ const languageOptions: {
   aliases: string;
 }[] = [
   {
+    id: "bin",
+    label: "Binär",
+    code: "01",
+    aliases: "bin binary binaer binär 01 null eins zero one matrix roboter",
+  },
+  {
     id: "de",
     label: "Deutsch",
     code: "DE",
@@ -2932,6 +2953,7 @@ const languageOptions: {
 const languageSortNames: Record<Lang, string> = {
   sq: "Albanisch",
   ar: "Arabisch",
+  bin: "Binär",
   zh: "Chinesisch",
   de: "Deutsch",
   en: "Englisch",
@@ -3065,8 +3087,8 @@ function EditableNumberInput({
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("de");
-  const text = words[lang];
-  const ui = uiText[lang];
+  const text = lang === "bin" ? binaryRecord(words.de) : words[lang];
+  const ui = lang === "bin" ? binaryRecord(uiText.de) : uiText[lang];
   const [toolQuery, setToolQuery] = useState("");
   const [toolInput, setToolInput] = useState("");
   const [languageQuery, setLanguageQuery] = useState("");
@@ -3096,6 +3118,7 @@ export default function Home() {
     pl: "pl-PL",
     ar: "ar-SA",
     hi: "hi-IN",
+    bin: "de-DE",
   } satisfies Record<Lang, string>)[lang];
   const units = ({
     de: { rpm: "U/min", rev: "mm/U", tooth: "mm/Z", minute: "mm/min" },
@@ -3118,6 +3141,7 @@ export default function Home() {
     pl: { rpm: "obr/min", rev: "mm/obr", tooth: "mm/ostrze", minute: "mm/min" },
     ar: { rpm: "دورة/دقيقة", rev: "مم/دورة", tooth: "مم/سن", minute: "مم/دقيقة" },
     hi: { rpm: "चक्र/मिनट", rev: "मिमी/चक्र", tooth: "मिमी/दाँत", minute: "मिमी/मिनट" },
+    bin: { rpm: "rpm", rev: "mm/rev", tooth: "mm/tooth", minute: "mm/min" },
   } satisfies Record<
     Lang,
     { rpm: string; rev: string; tooth: string; minute: string }
@@ -3177,7 +3201,7 @@ export default function Home() {
   const streamRef = useRef<MediaStream | null>(null);
   useEffect(() => {
     const saved = localStorage.getItem("zerspaner-language") as Lang | null;
-    if (saved && words[saved]) setLang(saved);
+    if (saved && (saved === "bin" || words[saved])) setLang(saved);
   }, []);
   const changeLanguage = (next: Lang) => {
     setLang(next);
