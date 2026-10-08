@@ -48,12 +48,21 @@ import {
 
 type Mode = "mill" | "drill" | "turn";
 type Theme = "standard" | "mint" | "lavender" | "peach";
+type SurfaceTheme = "white" | "ice" | "mint" | "lavender" | "peach";
 
 const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "standard", label: "Babyblau", colors: ["#eaf6ff", "#dfefff"] },
   { id: "mint", label: "Mint", colors: ["#ecfaf5", "#d9f4e9"] },
   { id: "lavender", label: "Lavendel", colors: ["#f4f0ff", "#e7e0ff"] },
   { id: "peach", label: "Pfirsich", colors: ["#fff4eb", "#ffe3d2"] },
+];
+
+const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
+  { id: "white", label: "Weiß", color: "#ffffff" },
+  { id: "ice", label: "Eisblau", color: "#f2f9ff" },
+  { id: "mint", label: "Mint", color: "#effbf7" },
+  { id: "lavender", label: "Lavendel", color: "#f6f2ff" },
+  { id: "peach", label: "Pfirsich", color: "#fff5ee" },
 ];
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
@@ -3080,6 +3089,7 @@ export default function Home() {
   const [toolInput, setToolInput] = useState("");
   const [languageQuery, setLanguageQuery] = useState("");
   const [theme, setTheme] = useState<Theme>("standard");
+  const [surfaceTheme, setSurfaceTheme] = useState<SurfaceTheme>("white");
   const filteredLanguages = languageOptions
     .filter((option) => languageMatches(option, languageQuery))
     .sort((left, right) =>
@@ -3201,6 +3211,19 @@ export default function Home() {
     setTheme(nextTheme);
     localStorage.setItem("zerspaner-theme", nextTheme);
     document.documentElement.dataset.theme = nextTheme;
+  };
+  useEffect(() => {
+    const savedSurface = localStorage.getItem("zerspaner-surface") as SurfaceTheme | null;
+    const nextSurface = surfaceOptions.some((option) => option.id === savedSurface)
+      ? savedSurface!
+      : "white";
+    setSurfaceTheme(nextSurface);
+    document.documentElement.dataset.surface = nextSurface;
+  }, []);
+  const changeSurfaceTheme = (nextSurface: SurfaceTheme) => {
+    setSurfaceTheme(nextSurface);
+    localStorage.setItem("zerspaner-surface", nextSurface);
+    document.documentElement.dataset.surface = nextSurface;
   };
   const changeLanguage = (next: Lang) => {
     setLang(next);
@@ -3354,26 +3377,51 @@ export default function Home() {
                 <Palette size={20} />
               </PopoverTrigger>
               <PopoverContent align="end" className="theme-menu">
-                <p>Hintergrund</p>
-                <div className="theme-options">
-                  {themeOptions.map((option) => (
-                    <button
-                      key={option.id}
-                      type="button"
-                      className={theme === option.id ? "active" : undefined}
-                      aria-pressed={theme === option.id}
-                      onClick={() => changeTheme(option.id)}
-                    >
-                      <span
-                        className="theme-swatch"
-                        style={{
-                          background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})`,
-                        }}
-                      />
-                      <span>{option.label}</span>
-                      {theme === option.id && <Check size={17} />}
-                    </button>
-                  ))}
+                <div className="theme-section">
+                  <p>Primärfarbe · Hintergrund</p>
+                  <div className="theme-options">
+                    {themeOptions.map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        className={theme === option.id ? "active" : undefined}
+                        aria-pressed={theme === option.id}
+                        onClick={() => changeTheme(option.id)}
+                      >
+                        <span
+                          className="theme-swatch"
+                          style={{
+                            background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})`,
+                          }}
+                        />
+                        <span>{option.label}</span>
+                        {theme === option.id && <Check size={17} />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="theme-section">
+                  <p>Sekundärfarbe · Kästen</p>
+                  <div className="surface-options">
+                    {surfaceOptions.map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        className={surfaceTheme === option.id ? "active" : undefined}
+                        aria-label={option.label}
+                        title={option.label}
+                        aria-pressed={surfaceTheme === option.id}
+                        onClick={() => changeSurfaceTheme(option.id)}
+                      >
+                        <span
+                          className="surface-swatch"
+                          style={{ background: option.color }}
+                        />
+                        <span>{option.label}</span>
+                        {surfaceTheme === option.id && <Check size={15} />}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </PopoverContent>
             </Popover>
