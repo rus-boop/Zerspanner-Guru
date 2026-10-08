@@ -118,7 +118,7 @@ html[data-surface="peach"]{--surface-panel:#fff4eb;--surface-control:#fff9f4}
   background:var(--surface-control,#fcfeff)!important;
 }
 .auto-card,.turning-note,.turning-note div{
-  background-color:var(--surface-control,#fcfeff)!important;
+  background:var(--surface-control,#fcfeff)!important;
 }
 
 
