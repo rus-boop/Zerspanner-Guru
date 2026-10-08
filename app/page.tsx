@@ -47,8 +47,8 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple";
-type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple";
+type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "black" | "white" | "cyan" | "pink" | "brown" | "navy";
+type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "cyan" | "pink" | "brown" | "navy";
 
 const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "standard", label: "Babyblau", colors: ["#cfe9fb", "#b8daf3"] },
@@ -59,12 +59,18 @@ const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "rose", label: "Rosé", colors: ["#f5d4e1", "#eeb9ce"] },
   { id: "vanilla", label: "Vanille", colors: ["#f4e6b9", "#ead795"] },
   { id: "sage", label: "Salbei", colors: ["#d6e5d2", "#bed5b8"] },
-  { id: "blue", label: "Blau", colors: ["#b8d9f2", "#8ebfe3"] },
-  { id: "red", label: "Rot", colors: ["#f2b8b8", "#e58f8f"] },
-  { id: "green", label: "Grün", colors: ["#b9dfc0", "#8fca9a"] },
-  { id: "yellow", label: "Gelb", colors: ["#f5df91", "#eac95e"] },
-  { id: "orange", label: "Orange", colors: ["#f4c094", "#e89b5f"] },
-  { id: "purple", label: "Violett", colors: ["#cdbbe9", "#ad91d7"] },
+  { id: "black", label: "Schwarz", colors: ["#252a31", "#07090c"] },
+  { id: "white", label: "Weiß", colors: ["#ffffff", "#e8edf1"] },
+  { id: "blue", label: "Blau", colors: ["#4da8e5", "#247fbd"] },
+  { id: "red", label: "Rot", colors: ["#ec7474", "#c94747"] },
+  { id: "green", label: "Grün", colors: ["#63c474", "#359849"] },
+  { id: "yellow", label: "Gelb", colors: ["#f4d451", "#d5aa12"] },
+  { id: "orange", label: "Orange", colors: ["#f19a50", "#ce671b"] },
+  { id: "purple", label: "Violett", colors: ["#a478da", "#7042ad"] },
+  { id: "cyan", label: "Cyan", colors: ["#43c9d8", "#1597aa"] },
+  { id: "pink", label: "Pink", colors: ["#ed75b7", "#c9448d"] },
+  { id: "brown", label: "Braun", colors: ["#ad7b5a", "#754a31"] },
+  { id: "navy", label: "Dunkelblau", colors: ["#365f91", "#183554"] },
 ];
 
 const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
@@ -77,15 +83,19 @@ const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
   { id: "rose", label: "Rosé", color: "#fff1f6" },
   { id: "vanilla", label: "Vanille", color: "#fffbea" },
   { id: "sage", label: "Salbei", color: "#f0f7ef" },
-  { id: "blue", label: "Blau", color: "#dceefb" },
-  { id: "red", label: "Rot", color: "#f9dddd" },
-  { id: "green", label: "Grün", color: "#ddf1e1" },
-  { id: "yellow", label: "Gelb", color: "#fbefbd" },
-  { id: "orange", label: "Orange", color: "#fae0c9" },
-  { id: "purple", label: "Violett", color: "#e8def7" },
+  { id: "blue", label: "Blau", color: "#b7dcf4" },
+  { id: "red", label: "Rot", color: "#f2bcbc" },
+  { id: "green", label: "Grün", color: "#bce3c4" },
+  { id: "yellow", label: "Gelb", color: "#f4df8d" },
+  { id: "orange", label: "Orange", color: "#f3c399" },
+  { id: "purple", label: "Violett", color: "#d2c0eb" },
+  { id: "cyan", label: "Cyan", color: "#afe3e9" },
+  { id: "pink", label: "Pink", color: "#efb6d5" },
+  { id: "brown", label: "Braun", color: "#d8b9a5" },
+  { id: "navy", label: "Dunkelblau", color: "#aebfd3" },
 ];
 
-const classicColorIds = new Set(["white", "blue", "red", "green", "yellow", "orange", "purple"]);
+const classicColorIds = new Set(["black", "white", "blue", "red", "green", "yellow", "orange", "purple", "cyan", "pink", "brown", "navy"]);
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
   id: string;
