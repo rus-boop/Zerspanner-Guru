@@ -48,7 +48,7 @@ import {
 
 type Mode = "mill" | "drill" | "turn";
 type Theme = "standard" | "mint" | "lavender" | "peach";
-type SurfaceTheme = "white" | "ice" | "mint" | "lavender" | "peach";
+type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach";
 
 const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "standard", label: "Babyblau", colors: ["#eaf6ff", "#dfefff"] },
@@ -59,10 +59,10 @@ const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
 
 const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
   { id: "white", label: "Weiß", color: "#ffffff" },
-  { id: "ice", label: "Eisblau", color: "#f2f9ff" },
-  { id: "mint", label: "Mint", color: "#effbf7" },
-  { id: "lavender", label: "Lavendel", color: "#f6f2ff" },
-  { id: "peach", label: "Pfirsich", color: "#fff5ee" },
+  { id: "standard", label: "Babyblau", color: "#eaf6ff" },
+  { id: "mint", label: "Mint", color: "#ecfaf5" },
+  { id: "lavender", label: "Lavendel", color: "#f4f0ff" },
+  { id: "peach", label: "Pfirsich", color: "#fff4eb" },
 ];
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
