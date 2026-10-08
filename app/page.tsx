@@ -47,8 +47,8 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage";
-type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage";
+type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple";
+type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple";
 
 const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "standard", label: "Babyblau", colors: ["#cfe9fb", "#b8daf3"] },
@@ -59,6 +59,12 @@ const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "rose", label: "Rosé", colors: ["#f5d4e1", "#eeb9ce"] },
   { id: "vanilla", label: "Vanille", colors: ["#f4e6b9", "#ead795"] },
   { id: "sage", label: "Salbei", colors: ["#d6e5d2", "#bed5b8"] },
+  { id: "blue", label: "Blau", colors: ["#b8d9f2", "#8ebfe3"] },
+  { id: "red", label: "Rot", colors: ["#f2b8b8", "#e58f8f"] },
+  { id: "green", label: "Grün", colors: ["#b9dfc0", "#8fca9a"] },
+  { id: "yellow", label: "Gelb", colors: ["#f5df91", "#eac95e"] },
+  { id: "orange", label: "Orange", colors: ["#f4c094", "#e89b5f"] },
+  { id: "purple", label: "Violett", colors: ["#cdbbe9", "#ad91d7"] },
 ];
 
 const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
@@ -71,6 +77,12 @@ const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
   { id: "rose", label: "Rosé", color: "#fff1f6" },
   { id: "vanilla", label: "Vanille", color: "#fffbea" },
   { id: "sage", label: "Salbei", color: "#f0f7ef" },
+  { id: "blue", label: "Blau", color: "#dceefb" },
+  { id: "red", label: "Rot", color: "#f9dddd" },
+  { id: "green", label: "Grün", color: "#ddf1e1" },
+  { id: "yellow", label: "Gelb", color: "#fbefbd" },
+  { id: "orange", label: "Orange", color: "#fae0c9" },
+  { id: "purple", label: "Violett", color: "#e8def7" },
 ];
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
