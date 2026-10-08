@@ -47,6 +47,7 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
+type ThemeCategory = "primary" | "secondary" | "complementary";
 type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "black" | "white" | "cyan" | "pink" | "brown" | "navy";
 type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "cyan" | "pink" | "brown" | "navy";
 
@@ -3136,6 +3137,7 @@ export default function Home() {
   const [languageQuery, setLanguageQuery] = useState("");
   const [theme, setTheme] = useState<Theme>("standard");
   const [surfaceTheme, setSurfaceTheme] = useState<SurfaceTheme>("white");
+  const [themeCategory, setThemeCategory] = useState<ThemeCategory>("primary");
   const filteredLanguages = languageOptions
     .filter((option) => languageMatches(option, languageQuery))
     .sort((left, right) =>
@@ -3427,114 +3429,108 @@ export default function Home() {
                 <Palette size={20} />
               </PopoverTrigger>
               <PopoverContent align="end" className="theme-menu">
-                <div className="theme-section">
-                  <p>Primärfarbe · Hintergrund</p>
-                  <span className="theme-group-label">Klassisch</span>
-                  <div className="theme-options">
-                    {themeOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
-                      <button
-                        key={option.id}
-                        type="button"
-                        className={theme === option.id ? "active" : undefined}
-                        aria-pressed={theme === option.id}
-                        onClick={() => changeTheme(option.id)}
-                      >
-                        <span
-                          className="theme-swatch"
-                          style={{
-                            background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})`,
-                          }}
-                        />
-                        <span>{option.label}</span>
-                        {theme === option.id && <Check size={17} />}
-                      </button>
-                    ))}
-                  </div>
-                  <span className="theme-group-label">Pastell</span>
-                  <div className="theme-options">
-                    {themeOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
-                      <button
-                        key={option.id}
-                        type="button"
-                        className={theme === option.id ? "active" : undefined}
-                        aria-pressed={theme === option.id}
-                        onClick={() => changeTheme(option.id)}
-                      >
-                        <span
-                          className="theme-swatch"
-                          style={{
-                            background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})`,
-                          }}
-                        />
-                        <span>{option.label}</span>
-                        {theme === option.id && <Check size={17} />}
-                      </button>
-                    ))}
-                  </div>
+                <div className="theme-tabs" role="tablist" aria-label="Farbbereich">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={themeCategory === "primary"}
+                    className={themeCategory === "primary" ? "active" : undefined}
+                    onClick={() => setThemeCategory("primary")}
+                  >
+                    Primär
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={themeCategory === "secondary"}
+                    className={themeCategory === "secondary" ? "active" : undefined}
+                    onClick={() => setThemeCategory("secondary")}
+                  >
+                    Sekundär
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={themeCategory === "complementary"}
+                    className={themeCategory === "complementary" ? "active" : undefined}
+                    onClick={() => setThemeCategory("complementary")}
+                  >
+                    Kombis
+                  </button>
                 </div>
-                <div className="theme-section">
-                  <p>Sekundärfarbe · Kästen</p>
-                  <span className="theme-group-label">Klassisch</span>
-                  <div className="surface-options">
-                    {surfaceOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
-                      <button
-                        key={option.id}
-                        type="button"
-                        className={surfaceTheme === option.id ? "active" : undefined}
-                        aria-label={option.label}
-                        title={option.label}
-                        aria-pressed={surfaceTheme === option.id}
-                        onClick={() => changeSurfaceTheme(option.id)}
-                      >
-                        <span className="surface-swatch" style={{ background: option.color }} />
-                        <span>{option.label}</span>
-                        {surfaceTheme === option.id && <Check size={15} />}
-                      </button>
-                    ))}
-                  </div>
-                  <span className="theme-group-label">Pastell</span>
-                  <div className="surface-options">
-                    {surfaceOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
-                      <button
-                        key={option.id}
-                        type="button"
-                        className={surfaceTheme === option.id ? "active" : undefined}
-                        aria-label={option.label}
-                        title={option.label}
-                        aria-pressed={surfaceTheme === option.id}
-                        onClick={() => changeSurfaceTheme(option.id)}
-                      >
-                        <span className="surface-swatch" style={{ background: option.color }} />
-                        <span>{option.label}</span>
-                        {surfaceTheme === option.id && <Check size={15} />}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div className="theme-section complementary-section">
-                  <p>Komplementär · Kombinationen</p>
-                  <div className="complementary-options">
-                    {complementaryOptions.map((option) => {
-                      const active = theme === option.primary && surfaceTheme === option.secondary;
-                      return (
-                        <button
-                          key={option.label}
-                          type="button"
-                          className={active ? "active" : undefined}
-                          aria-pressed={active}
-                          onClick={() => changeComplementaryTheme(option.primary, option.secondary)}
-                        >
-                          <span className="pair-swatch">
-                            <i style={{ background: option.colors[0] }} />
-                            <i style={{ background: option.colors[1] }} />
-                          </span>
+
+                {themeCategory === "primary" && (
+                  <div className="theme-section">
+                    <p>Primärfarbe · Hintergrund</p>
+                    <span className="theme-group-label">Klassisch</span>
+                    <div className="theme-options">
+                      {themeOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
+                        <button key={option.id} type="button" className={theme === option.id ? "active" : undefined} aria-pressed={theme === option.id} onClick={() => changeTheme(option.id)}>
+                          <span className="theme-swatch" style={{ background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})` }} />
                           <span>{option.label}</span>
-                          {active && <Check size={15} />}
+                          {theme === option.id && <Check size={17} />}
                         </button>
-                      );
-                    })}
+                      ))}
+                    </div>
+                    <span className="theme-group-label">Pastell</span>
+                    <div className="theme-options">
+                      {themeOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
+                        <button key={option.id} type="button" className={theme === option.id ? "active" : undefined} aria-pressed={theme === option.id} onClick={() => changeTheme(option.id)}>
+                          <span className="theme-swatch" style={{ background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})` }} />
+                          <span>{option.label}</span>
+                          {theme === option.id && <Check size={17} />}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {themeCategory === "secondary" && (
+                  <div className="theme-section">
+                    <p>Sekundärfarbe · Kästen</p>
+                    <span className="theme-group-label">Klassisch</span>
+                    <div className="surface-options">
+                      {surfaceOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
+                        <button key={option.id} type="button" className={surfaceTheme === option.id ? "active" : undefined} aria-label={option.label} title={option.label} aria-pressed={surfaceTheme === option.id} onClick={() => changeSurfaceTheme(option.id)}>
+                          <span className="surface-swatch" style={{ background: option.color }} />
+                          <span>{option.label}</span>
+                          {surfaceTheme === option.id && <Check size={15} />}
+                        </button>
+                      ))}
+                    </div>
+                    <span className="theme-group-label">Pastell</span>
+                    <div className="surface-options">
+                      {surfaceOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
+                        <button key={option.id} type="button" className={surfaceTheme === option.id ? "active" : undefined} aria-label={option.label} title={option.label} aria-pressed={surfaceTheme === option.id} onClick={() => changeSurfaceTheme(option.id)}>
+                          <span className="surface-swatch" style={{ background: option.color }} />
+                          <span>{option.label}</span>
+                          {surfaceTheme === option.id && <Check size={15} />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {themeCategory === "complementary" && (
+                  <div className="theme-section complementary-section">
+                    <p>Komplementär · Kombinationen</p>
+                    <div className="complementary-options">
+                      {complementaryOptions.map((option) => {
+                        const active = theme === option.primary && surfaceTheme === option.secondary;
+                        return (
+                          <button key={option.label} type="button" className={active ? "active" : undefined} aria-pressed={active} onClick={() => changeComplementaryTheme(option.primary, option.secondary)}>
+                            <span className="pair-swatch">
+                              <i style={{ background: option.colors[0] }} />
+                              <i style={{ background: option.colors[1] }} />
+                            </span>
+                            <span>{option.label}</span>
+                            {active && <Check size={15} />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </PopoverContent>
             </Popover>
             <Popover>
