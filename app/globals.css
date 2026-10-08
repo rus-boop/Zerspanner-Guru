@@ -88,10 +88,10 @@ html[data-theme="peach"] body{
 }
 .theme-trigger:hover,.theme-trigger[data-state="open"]{background:#dceeff;color:#225f91}
 .theme-menu{
-  width:min(240px,calc(100vw - 24px));border:1px solid #bdd9ed;border-radius:16px;
+  width:min(310px,calc(100vw - 24px));border:1px solid #bdd9ed;border-radius:16px;
   background:#fafdff;padding:9px;box-shadow:0 16px 38px #255b7c22;
 }
-.theme-menu>p{padding:6px 9px 8px;font-size:12px;font-weight:700;color:#68869c}
+.theme-section>p{padding:6px 9px 8px;font-size:12px;font-weight:700;color:#68869c}.theme-section+.theme-section{margin-top:10px;padding-top:9px;border-top:1px solid #d8e8f1}
 .theme-options{display:grid;gap:5px}
 .theme-options button{
   display:grid;grid-template-columns:34px 1fr 20px;align-items:center;gap:10px;width:100%;
@@ -101,6 +101,19 @@ html[data-theme="peach"] body{
 .theme-options button:hover{background:#edf7fd}
 .theme-options button.active{border-color:#83bfdf;background:#e7f4fc;color:#175f8b;font-weight:700}
 .theme-swatch{width:32px;height:32px;border:1px solid #c5d9e5;border-radius:10px;box-shadow:inset 0 0 0 2px #ffffff80}
+.surface-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.surface-options button{display:grid;place-items:center;gap:3px;min-width:0;border:1px solid transparent;border-radius:10px;padding:5px 2px;color:#607789;font-size:9px}
+.surface-options button:hover{background:#edf7fd}.surface-options button.active{border-color:#83bfdf;background:#e7f4fc;color:#175f8b;font-weight:700}
+.surface-options button svg{position:absolute;margin:-29px 0 0 27px;padding:1px;border-radius:50%;background:#258bd8;color:#fff}
+.surface-swatch{display:block;width:30px;height:30px;border:1px solid #bfd4df;border-radius:50%;box-shadow:inset 0 0 0 2px #ffffff99,0 2px 5px #254b6315}
+
+html[data-surface="white"]{--surface-panel:#fffffffa}
+html[data-surface="ice"]{--surface-panel:#f2f9fff5}
+html[data-surface="mint"]{--surface-panel:#effbf7f5}
+html[data-surface="lavender"]{--surface-panel:#f6f2fff5}
+html[data-surface="peach"]{--surface-panel:#fff5eef5}
+.panel,.result-panel{background:var(--surface-panel,#fffffffa)}
+
 
 @media(max-width:520px){
   .logo-image{width:43px;height:43px;border-radius:12px}
