@@ -96,6 +96,20 @@ const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
 ];
 
 const classicColorIds = new Set(["black", "white", "blue", "red", "green", "yellow", "orange", "purple", "cyan", "pink", "brown", "navy"]);
+
+const complementaryOptions: {
+  label: string;
+  primary: Theme;
+  secondary: SurfaceTheme;
+  colors: [string, string];
+}[] = [
+  { label: "Blau · Orange", primary: "blue", secondary: "orange", colors: ["#247fbd", "#f3c399"] },
+  { label: "Rot · Grün", primary: "red", secondary: "green", colors: ["#c94747", "#bce3c4"] },
+  { label: "Violett · Gelb", primary: "purple", secondary: "yellow", colors: ["#7042ad", "#f4df8d"] },
+  { label: "Cyan · Rot", primary: "cyan", secondary: "red", colors: ["#1597aa", "#f2bcbc"] },
+  { label: "Pink · Grün", primary: "pink", secondary: "green", colors: ["#c9448d", "#bce3c4"] },
+  { label: "Dunkelblau · Orange", primary: "navy", secondary: "orange", colors: ["#183554", "#f3c399"] },
+];
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
   id: string;
@@ -3257,6 +3271,10 @@ export default function Home() {
     localStorage.setItem("zerspaner-surface", nextSurface);
     document.documentElement.dataset.surface = nextSurface;
   };
+  const changeComplementaryTheme = (primary: Theme, secondary: SurfaceTheme) => {
+    changeTheme(primary);
+    changeSurfaceTheme(secondary);
+  };
   const changeLanguage = (next: Lang) => {
     setLang(next);
     setLanguageQuery("");
@@ -3491,6 +3509,30 @@ export default function Home() {
                         {surfaceTheme === option.id && <Check size={15} />}
                       </button>
                     ))}
+                  </div>
+                </div>
+                <div className="theme-section complementary-section">
+                  <p>Komplementär · Kombinationen</p>
+                  <div className="complementary-options">
+                    {complementaryOptions.map((option) => {
+                      const active = theme === option.primary && surfaceTheme === option.secondary;
+                      return (
+                        <button
+                          key={option.label}
+                          type="button"
+                          className={active ? "active" : undefined}
+                          aria-pressed={active}
+                          onClick={() => changeComplementaryTheme(option.primary, option.secondary)}
+                        >
+                          <span className="pair-swatch">
+                            <i style={{ background: option.colors[0] }} />
+                            <i style={{ background: option.colors[1] }} />
+                          </span>
+                          <span>{option.label}</span>
+                          {active && <Check size={15} />}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </PopoverContent>
