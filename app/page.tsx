@@ -51,14 +51,14 @@ type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "van
 type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage";
 
 const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
-  { id: "standard", label: "Babyblau", colors: ["#eaf6ff", "#dfefff"] },
-  { id: "mint", label: "Mint", colors: ["#ecfaf5", "#d9f4e9"] },
-  { id: "lavender", label: "Lavendel", colors: ["#f4f0ff", "#e7e0ff"] },
-  { id: "peach", label: "Pfirsich", colors: ["#fff4eb", "#ffe3d2"] },
-  { id: "aqua", label: "Aqua", colors: ["#eafcff", "#d5f5fa"] },
-  { id: "rose", label: "Rosé", colors: ["#fff1f6", "#f9dce8"] },
-  { id: "vanilla", label: "Vanille", colors: ["#fffbea", "#f7edc9"] },
-  { id: "sage", label: "Salbei", colors: ["#f0f7ef", "#dcebd9"] },
+  { id: "standard", label: "Babyblau", colors: ["#cfe9fb", "#b8daf3"] },
+  { id: "mint", label: "Mint", colors: ["#d4f0e5", "#bce3d4"] },
+  { id: "lavender", label: "Lavendel", colors: ["#e2dafa", "#cfc2f1"] },
+  { id: "peach", label: "Pfirsich", colors: ["#fbe0cf", "#f3c8ae"] },
+  { id: "aqua", label: "Aqua", colors: ["#caedf3", "#aee0e8"] },
+  { id: "rose", label: "Rosé", colors: ["#f5d4e1", "#eeb9ce"] },
+  { id: "vanilla", label: "Vanille", colors: ["#f4e6b9", "#ead795"] },
+  { id: "sage", label: "Salbei", colors: ["#d6e5d2", "#bed5b8"] },
 ];
 
 const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
