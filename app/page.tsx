@@ -3458,6 +3458,16 @@ export default function Home() {
                     Kombis
                   </button>
                 </div>
+                <div className="current-theme-preview">
+                  <span>
+                    <i style={{ background: themeOptions.find((option) => option.id === theme)?.colors[0] }} />
+                    Primär: <strong>{themeOptions.find((option) => option.id === theme)?.label}</strong>
+                  </span>
+                  <span>
+                    <i style={{ background: surfaceOptions.find((option) => option.id === surfaceTheme)?.color }} />
+                    Sekundär: <strong>{surfaceOptions.find((option) => option.id === surfaceTheme)?.label}</strong>
+                  </span>
+                </div>
 
                 {themeCategory === "primary" && (
                   <div className="theme-section">
@@ -3465,7 +3475,18 @@ export default function Home() {
                     <span className="theme-group-label">Klassisch</span>
                     <div className="theme-options">
                       {themeOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
-                        <button key={option.id} type="button" className={theme === option.id ? "active" : undefined} aria-pressed={theme === option.id} onClick={() => changeTheme(option.id)}>
+                        <button
+                          key={option.id}
+                          type="button"
+                          className={theme === option.id ? "active" : undefined}
+                          aria-pressed={theme === option.id}
+                          style={theme === option.id ? {
+                            background: option.colors[0],
+                            borderColor: option.colors[1],
+                            color: ["black", "navy", "brown", "purple", "red"].includes(option.id) ? "#ffffff" : "#183048",
+                          } : undefined}
+                          onClick={() => changeTheme(option.id)}
+                        >
                           <span className="theme-swatch" style={{ background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})` }} />
                           <span>{option.label}</span>
                           {theme === option.id && <Check size={17} />}
@@ -3475,7 +3496,18 @@ export default function Home() {
                     <span className="theme-group-label">Pastell</span>
                     <div className="theme-options">
                       {themeOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
-                        <button key={option.id} type="button" className={theme === option.id ? "active" : undefined} aria-pressed={theme === option.id} onClick={() => changeTheme(option.id)}>
+                        <button
+                          key={option.id}
+                          type="button"
+                          className={theme === option.id ? "active" : undefined}
+                          aria-pressed={theme === option.id}
+                          style={theme === option.id ? {
+                            background: option.colors[0],
+                            borderColor: option.colors[1],
+                            color: ["black", "navy", "brown", "purple", "red"].includes(option.id) ? "#ffffff" : "#183048",
+                          } : undefined}
+                          onClick={() => changeTheme(option.id)}
+                        >
                           <span className="theme-swatch" style={{ background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})` }} />
                           <span>{option.label}</span>
                           {theme === option.id && <Check size={17} />}
@@ -3491,7 +3523,19 @@ export default function Home() {
                     <span className="theme-group-label">Klassisch</span>
                     <div className="surface-options">
                       {surfaceOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
-                        <button key={option.id} type="button" className={surfaceTheme === option.id ? "active" : undefined} aria-label={option.label} title={option.label} aria-pressed={surfaceTheme === option.id} onClick={() => changeSurfaceTheme(option.id)}>
+                        <button
+                          key={option.id}
+                          type="button"
+                          className={surfaceTheme === option.id ? "active" : undefined}
+                          aria-label={option.label}
+                          title={option.label}
+                          aria-pressed={surfaceTheme === option.id}
+                          style={surfaceTheme === option.id ? {
+                            background: option.color,
+                            borderColor: option.color,
+                          } : undefined}
+                          onClick={() => changeSurfaceTheme(option.id)}
+                        >
                           <span className="surface-swatch" style={{ background: option.color }} />
                           <span>{option.label}</span>
                           {surfaceTheme === option.id && <Check size={15} />}
@@ -3501,7 +3545,19 @@ export default function Home() {
                     <span className="theme-group-label">Pastell</span>
                     <div className="surface-options">
                       {surfaceOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
-                        <button key={option.id} type="button" className={surfaceTheme === option.id ? "active" : undefined} aria-label={option.label} title={option.label} aria-pressed={surfaceTheme === option.id} onClick={() => changeSurfaceTheme(option.id)}>
+                        <button
+                          key={option.id}
+                          type="button"
+                          className={surfaceTheme === option.id ? "active" : undefined}
+                          aria-label={option.label}
+                          title={option.label}
+                          aria-pressed={surfaceTheme === option.id}
+                          style={surfaceTheme === option.id ? {
+                            background: option.color,
+                            borderColor: option.color,
+                          } : undefined}
+                          onClick={() => changeSurfaceTheme(option.id)}
+                        >
                           <span className="surface-swatch" style={{ background: option.color }} />
                           <span>{option.label}</span>
                           {surfaceTheme === option.id && <Check size={15} />}
