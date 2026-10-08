@@ -49,8 +49,9 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type ThemeCategory = "primary" | "secondary" | "complementary";
-type SavedTheme = { id: string; primary: Theme; secondary: SurfaceTheme };
+type ThemeCategory = "primary" | "secondary" | "accent" | "complementary";
+type AccentTheme = "auto" | "turquoise" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "pink" | "black" | "rainbow";
+type SavedTheme = { id: string; primary: Theme; secondary: SurfaceTheme; accent?: AccentTheme };
 type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "black" | "white" | "cyan" | "pink" | "brown" | "navy";
 type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage" | "blue" | "red" | "green" | "yellow" | "orange" | "purple" | "cyan" | "pink" | "brown" | "navy";
 
@@ -100,6 +101,20 @@ const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
 ];
 
 const classicColorIds = new Set(["black", "white", "blue", "red", "green", "yellow", "orange", "purple", "cyan", "pink", "brown", "navy"]);
+
+const accentOptions: { id: AccentTheme; label: string; color: string }[] = [
+  { id: "auto", label: "Automatisch", color: "linear-gradient(90deg,#b8daf3,#f3c8ae)" },
+  { id: "turquoise", label: "Türkis", color: "#11a49a" },
+  { id: "blue", label: "Blau", color: "#357fd1" },
+  { id: "red", label: "Rot", color: "#c92f3f" },
+  { id: "green", label: "Grün", color: "#319451" },
+  { id: "yellow", label: "Gelb", color: "#d9ad16" },
+  { id: "orange", label: "Orange", color: "#dd711f" },
+  { id: "purple", label: "Violett", color: "#7445b5" },
+  { id: "pink", label: "Pink", color: "#ca3e89" },
+  { id: "black", label: "Schwarz", color: "#20262d" },
+  { id: "rainbow", label: "Bunt", color: "linear-gradient(90deg,#11a49a,#5574ef,#f16d70)" },
+];
 
 const complementaryOptions: {
   label: string;
@@ -3141,6 +3156,7 @@ export default function Home() {
   const [theme, setTheme] = useState<Theme>("standard");
   const [surfaceTheme, setSurfaceTheme] = useState<SurfaceTheme>("white");
   const [themeCategory, setThemeCategory] = useState<ThemeCategory>("primary");
+  const [accentTheme, setAccentTheme] = useState<AccentTheme>("auto");
   const [savedThemes, setSavedThemes] = useState<SavedTheme[]>([]);
   const filteredLanguages = languageOptions
     .filter((option) => languageMatches(option, languageQuery))
@@ -3278,6 +3294,17 @@ export default function Home() {
     document.documentElement.dataset.surface = nextSurface;
   };
   useEffect(() => {
+    const savedAccent = localStorage.getItem("zerspaner-accent") as AccentTheme | null;
+    const nextAccent = accentOptions.some((option) => option.id === savedAccent) ? savedAccent! : "auto";
+    setAccentTheme(nextAccent);
+    document.documentElement.dataset.accent = nextAccent;
+  }, []);
+  const changeAccentTheme = (nextAccent: AccentTheme) => {
+    setAccentTheme(nextAccent);
+    localStorage.setItem("zerspaner-accent", nextAccent);
+    document.documentElement.dataset.accent = nextAccent;
+  };
+  useEffect(() => {
     try {
       const stored = JSON.parse(localStorage.getItem("zerspaner-saved-themes") ?? "[]");
       if (Array.isArray(stored)) setSavedThemes(stored.slice(0, 12));
@@ -3286,10 +3313,10 @@ export default function Home() {
     }
   }, []);
   const saveCurrentTheme = () => {
-    const id = `${theme}-${surfaceTheme}`;
+    const id = `${theme}-${surfaceTheme}-${accentTheme}`;
     setSavedThemes((current) => {
       if (current.some((item) => item.id === id)) return current;
-      const next = [...current, { id, primary: theme, secondary: surfaceTheme }].slice(-12);
+      const next = [...current, { id, primary: theme, secondary: surfaceTheme, accent: accentTheme }].slice(-12);
       localStorage.setItem("zerspaner-saved-themes", JSON.stringify(next));
       return next;
     });
@@ -3476,6 +3503,15 @@ export default function Home() {
                   >
                     Sekundär
                   </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={themeCategory === "accent"}
+                    className={themeCategory === "accent" ? "active" : undefined}
+                    onClick={() => setThemeCategory("accent")}
+                  >
+                    Balken
+                  </button>
                  <button
                     type="button"
                     role="tab"
@@ -3595,6 +3631,21 @@ export default function Home() {
                   </div>
                 )}
 
+                {themeCategory === "accent" && (
+                  <div className="theme-section">
+                    <p>Kartenkonturen · Balken</p>
+                    <div className="accent-options">
+                      {accentOptions.map((option) => (
+                        <button key={option.id} type="button" className={accentTheme === option.id ? "active" : undefined} aria-pressed={accentTheme === option.id} onClick={() => changeAccentTheme(option.id)}>
+                          <span className="accent-swatch" style={{ background: option.color }} />
+                          <span>{option.label}</span>
+                          {accentTheme === option.id && <Check size={16} />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {themeCategory === "complementary" && (
                   <div className="theme-section complementary-section">
                     <p>Komplementär · Kombinationen</p>
@@ -3616,11 +3667,11 @@ export default function Home() {
                     <button
                       type="button"
                       className="save-theme-button"
-                      disabled={savedThemes.some((item) => item.id === `${theme}-${surfaceTheme}`)}
+                      disabled={savedThemes.some((item) => item.id === `${theme}-${surfaceTheme}-${accentTheme}`)}
                       onClick={saveCurrentTheme}
                     >
                       <BookmarkPlus size={17} />
-                      {savedThemes.some((item) => item.id === `${theme}-${surfaceTheme}`)
+                      {savedThemes.some((item) => item.id === `${theme}-${surfaceTheme}-${accentTheme}`)
                         ? "Kombination gespeichert"
                         : "Aktuelle Kombination speichern"}
                     </button>
@@ -3632,7 +3683,7 @@ export default function Home() {
                           const secondary = surfaceOptions.find((option) => option.id === item.secondary);
                           return (
                             <div key={item.id} className="saved-theme-row">
-                              <button type="button" className="saved-theme-apply" onClick={() => changeComplementaryTheme(item.primary, item.secondary)}>
+                              <button type="button" className="saved-theme-apply" onClick={() => { changeComplementaryTheme(item.primary, item.secondary); changeAccentTheme(item.accent ?? "auto"); }}>
                                 <span className="pair-swatch">
                                   <i style={{ background: primary?.colors[0] }} />
                                   <i style={{ background: secondary?.color }} />
