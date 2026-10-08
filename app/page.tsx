@@ -84,6 +84,8 @@ const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
   { id: "orange", label: "Orange", color: "#fae0c9" },
   { id: "purple", label: "Violett", color: "#e8def7" },
 ];
+
+const classicColorIds = new Set(["white", "blue", "red", "green", "yellow", "orange", "purple"]);
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
   id: string;
@@ -3399,8 +3401,30 @@ export default function Home() {
               <PopoverContent align="end" className="theme-menu">
                 <div className="theme-section">
                   <p>Primärfarbe · Hintergrund</p>
+                  <span className="theme-group-label">Klassisch</span>
                   <div className="theme-options">
-                    {themeOptions.map((option) => (
+                    {themeOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        className={theme === option.id ? "active" : undefined}
+                        aria-pressed={theme === option.id}
+                        onClick={() => changeTheme(option.id)}
+                      >
+                        <span
+                          className="theme-swatch"
+                          style={{
+                            background: `linear-gradient(135deg, ${option.colors[0]}, ${option.colors[1]})`,
+                          }}
+                        />
+                        <span>{option.label}</span>
+                        {theme === option.id && <Check size={17} />}
+                      </button>
+                    ))}
+                  </div>
+                  <span className="theme-group-label">Pastell</span>
+                  <div className="theme-options">
+                    {themeOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
                       <button
                         key={option.id}
                         type="button"
@@ -3422,8 +3446,9 @@ export default function Home() {
                 </div>
                 <div className="theme-section">
                   <p>Sekundärfarbe · Kästen</p>
+                  <span className="theme-group-label">Klassisch</span>
                   <div className="surface-options">
-                    {surfaceOptions.map((option) => (
+                    {surfaceOptions.filter((option) => classicColorIds.has(option.id)).map((option) => (
                       <button
                         key={option.id}
                         type="button"
@@ -3433,10 +3458,25 @@ export default function Home() {
                         aria-pressed={surfaceTheme === option.id}
                         onClick={() => changeSurfaceTheme(option.id)}
                       >
-                        <span
-                          className="surface-swatch"
-                          style={{ background: option.color }}
-                        />
+                        <span className="surface-swatch" style={{ background: option.color }} />
+                        <span>{option.label}</span>
+                        {surfaceTheme === option.id && <Check size={15} />}
+                      </button>
+                    ))}
+                  </div>
+                  <span className="theme-group-label">Pastell</span>
+                  <div className="surface-options">
+                    {surfaceOptions.filter((option) => !classicColorIds.has(option.id)).map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        className={surfaceTheme === option.id ? "active" : undefined}
+                        aria-label={option.label}
+                        title={option.label}
+                        aria-pressed={surfaceTheme === option.id}
+                        onClick={() => changeSurfaceTheme(option.id)}
+                      >
+                        <span className="surface-swatch" style={{ background: option.color }} />
                         <span>{option.label}</span>
                         {surfaceTheme === option.id && <Check size={15} />}
                       </button>
