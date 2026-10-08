@@ -94,6 +94,12 @@ html[data-theme="vanilla"] body{
 html[data-theme="sage"] body{
   background:radial-gradient(circle at 8% 0%,#fbfdfb 0,transparent 32%),radial-gradient(circle at 100% 12%,#bed5b8 0,transparent 36%),radial-gradient(circle at 78% 100%,#cadfc5 0,transparent 30%),#d6e5d2;
 }
+html[data-theme="blue"] body{background:radial-gradient(circle at 8% 0%,#eaf5fc 0,transparent 32%),radial-gradient(circle at 100% 12%,#8ebfe3 0,transparent 36%),#b8d9f2}
+html[data-theme="red"] body{background:radial-gradient(circle at 8% 0%,#fdecec 0,transparent 32%),radial-gradient(circle at 100% 12%,#e58f8f 0,transparent 36%),#f2b8b8}
+html[data-theme="green"] body{background:radial-gradient(circle at 8% 0%,#edf8ef 0,transparent 32%),radial-gradient(circle at 100% 12%,#8fca9a 0,transparent 36%),#b9dfc0}
+html[data-theme="yellow"] body{background:radial-gradient(circle at 8% 0%,#fff8dc 0,transparent 32%),radial-gradient(circle at 100% 12%,#eac95e 0,transparent 36%),#f5df91}
+html[data-theme="orange"] body{background:radial-gradient(circle at 8% 0%,#fceddf 0,transparent 32%),radial-gradient(circle at 100% 12%,#e89b5f 0,transparent 36%),#f4c094}
+html[data-theme="purple"] body{background:radial-gradient(circle at 8% 0%,#f0eafb 0,transparent 32%),radial-gradient(circle at 100% 12%,#ad91d7 0,transparent 36%),#cdbbe9}
 .theme-trigger{
   display:grid;place-items:center;width:44px;height:44px;border:1px solid #b8d8ef;border-radius:50%;
   background:#f8fcff;color:#347db4;box-shadow:0 6px 18px #2878aa18;
@@ -128,6 +134,12 @@ html[data-surface="aqua"]{--surface-panel:#d8f1f5;--surface-control:#fbfeff}
 html[data-surface="rose"]{--surface-panel:#f4dfe7;--surface-control:#fffbfd}
 html[data-surface="vanilla"]{--surface-panel:#f2e8c8;--surface-control:#fffef9}
 html[data-surface="sage"]{--surface-panel:#dfeadd;--surface-control:#fcfefb}
+html[data-surface="blue"]{--surface-panel:#dceefb;--surface-control:#f9fcff}
+html[data-surface="red"]{--surface-panel:#f9dddd;--surface-control:#fffafa}
+html[data-surface="green"]{--surface-panel:#ddf1e1;--surface-control:#fbfffc}
+html[data-surface="yellow"]{--surface-panel:#fbefbd;--surface-control:#fffdf5}
+html[data-surface="orange"]{--surface-panel:#fae0c9;--surface-control:#fffaf6}
+html[data-surface="purple"]{--surface-panel:#e8def7;--surface-control:#fcfaff}
 .panel,.result-panel{background:var(--surface-panel,#ffffff)!important}
 .control,.theme-menu,.language-menu,.language-search,
 [role="dialog"],[role="listbox"]{
