@@ -62,7 +62,7 @@ const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "black", label: "Schwarz", colors: ["#252a31", "#07090c"] },
   { id: "white", label: "Weiß", colors: ["#ffffff", "#e8edf1"] },
   { id: "blue", label: "Blau", colors: ["#4da8e5", "#247fbd"] },
-  { id: "red", label: "Rot", colors: ["#ec7474", "#c94747"] },
+  { id: "red", label: "Rot", colors: ["#dc4747", "#9f2020"] },
   { id: "green", label: "Grün", colors: ["#63c474", "#359849"] },
   { id: "yellow", label: "Gelb", colors: ["#f4d451", "#d5aa12"] },
   { id: "orange", label: "Orange", colors: ["#f19a50", "#ce671b"] },
@@ -84,7 +84,7 @@ const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
   { id: "vanilla", label: "Vanille", color: "#fffbea" },
   { id: "sage", label: "Salbei", color: "#f0f7ef" },
   { id: "blue", label: "Blau", color: "#b7dcf4" },
-  { id: "red", label: "Rot", color: "#f2bcbc" },
+  { id: "red", label: "Rot", color: "#efa7a0" },
   { id: "green", label: "Grün", color: "#bce3c4" },
   { id: "yellow", label: "Gelb", color: "#f4df8d" },
   { id: "orange", label: "Orange", color: "#f3c399" },
@@ -103,12 +103,12 @@ const complementaryOptions: {
   secondary: SurfaceTheme;
   colors: [string, string];
 }[] = [
-  { label: "Blau · Orange", primary: "blue", secondary: "orange", colors: ["#247fbd", "#f3c399"] },
-  { label: "Rot · Grün", primary: "red", secondary: "green", colors: ["#c94747", "#bce3c4"] },
-  { label: "Violett · Gelb", primary: "purple", secondary: "yellow", colors: ["#7042ad", "#f4df8d"] },
-  { label: "Cyan · Rot", primary: "cyan", secondary: "red", colors: ["#1597aa", "#f2bcbc"] },
-  { label: "Pink · Grün", primary: "pink", secondary: "green", colors: ["#c9448d", "#bce3c4"] },
-  { label: "Dunkelblau · Orange", primary: "navy", secondary: "orange", colors: ["#183554", "#f3c399"] },
+  { label: "Kobaltblau · Warmorange", primary: "blue", secondary: "orange", colors: ["#247fbd", "#f3c399"] },
+  { label: "Tiefrot · Mintgrün", primary: "red", secondary: "mint", colors: ["#9f2020", "#def3ea"] },
+  { label: "Aubergine · Goldgelb", primary: "purple", secondary: "yellow", colors: ["#7042ad", "#f4df8d"] },
+  { label: "Petrol · Koralle", primary: "cyan", secondary: "red", colors: ["#117f90", "#efa7a0"] },
+  { label: "Smaragd · Rosé", primary: "green", secondary: "rose", colors: ["#247f3a", "#f4dfe7"] },
+  { label: "Marine · Apricot", primary: "navy", secondary: "peach", colors: ["#183554", "#f8e4d7"] },
 ];
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
