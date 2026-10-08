@@ -47,14 +47,18 @@ import {
 } from "@/components/ui/dialog";
 
 type Mode = "mill" | "drill" | "turn";
-type Theme = "standard" | "mint" | "lavender" | "peach";
-type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach";
+type Theme = "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage";
+type SurfaceTheme = "white" | "standard" | "mint" | "lavender" | "peach" | "aqua" | "rose" | "vanilla" | "sage";
 
 const themeOptions: { id: Theme; label: string; colors: string[] }[] = [
   { id: "standard", label: "Babyblau", colors: ["#eaf6ff", "#dfefff"] },
   { id: "mint", label: "Mint", colors: ["#ecfaf5", "#d9f4e9"] },
   { id: "lavender", label: "Lavendel", colors: ["#f4f0ff", "#e7e0ff"] },
   { id: "peach", label: "Pfirsich", colors: ["#fff4eb", "#ffe3d2"] },
+  { id: "aqua", label: "Aqua", colors: ["#eafcff", "#d5f5fa"] },
+  { id: "rose", label: "Rosé", colors: ["#fff1f6", "#f9dce8"] },
+  { id: "vanilla", label: "Vanille", colors: ["#fffbea", "#f7edc9"] },
+  { id: "sage", label: "Salbei", colors: ["#f0f7ef", "#dcebd9"] },
 ];
 
 const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
@@ -63,6 +67,10 @@ const surfaceOptions: { id: SurfaceTheme; label: string; color: string }[] = [
   { id: "mint", label: "Mint", color: "#ecfaf5" },
   { id: "lavender", label: "Lavendel", color: "#f4f0ff" },
   { id: "peach", label: "Pfirsich", color: "#fff4eb" },
+  { id: "aqua", label: "Aqua", color: "#eafcff" },
+  { id: "rose", label: "Rosé", color: "#fff1f6" },
+  { id: "vanilla", label: "Vanille", color: "#fffbea" },
+  { id: "sage", label: "Salbei", color: "#f0f7ef" },
 ];
 type Lang = "de" | "en" | "ru" | "sv" | "tr" | "es" | "pt" | "sq" | "zh" | "ja" | "vi" | "fr" | "ko" | "it" | "nl" | "cs" | "ro" | "pl" | "ar" | "hi";
 type Tool = {
