@@ -268,3 +268,10 @@ html[data-accent="rainbow"]{--chosen-card-border:#5574ef;--chosen-card-strip:lin
 .accent-options button:hover{background:#f0f9fd}
 .accent-options button.active{border-color:#334e60;box-shadow:0 0 0 2px #fff,0 0 0 4px #263f5238}
 .accent-swatch{display:block;width:28px;height:28px;border:1px solid #9eb8c8;border-radius:8px}
+
+.scan-security-note{
+  display:flex;align-items:flex-start;gap:8px;margin-top:8px;border:1px solid #bfe0d8;
+  border-radius:10px;background:#eefaf6;padding:9px 11px;color:#25685b;
+  font-size:12px;line-height:1.45;
+}
+.scan-security-note svg{flex:none;margin-top:1px}
