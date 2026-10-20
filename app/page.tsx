@@ -3978,6 +3978,10 @@ export default function Home() {
                       <span>{ui.recognized}</span>
                     </div>
                     <p className="demo-warning">{ui.demoWarning}</p>
+                    <div className="scan-security-note">
+                      <ShieldCheck size={17} />
+                      <span>{ui.cameraPrivacy}</span>
+                    </div>
                     <dl>
                       <div>
                         <dt>{ui.manufacturer}</dt>
@@ -3985,7 +3989,7 @@ export default function Home() {
                       </div>
                       <div>
                         <dt>{ui.article}</dt>
-                        <dd>DEMO-HSS-10</dd>
+                        <dd aria-label="Artikelnummer geschützt">••••-HSS-10</dd>
                       </div>
                       <div>
                         <dt>{ui.toolName}</dt>
